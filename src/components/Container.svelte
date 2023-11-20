@@ -1,4 +1,15 @@
-<div class="container">
+<script lang="ts">
+  import { onMount } from "svelte";
+  let container: HTMLDivElement;
+  onMount(() => {
+    if (container) {
+      container.style.backgroundImage =
+        "url(https://w.wallhaven.cc/full/1p/wallhaven-1poo61.jpg)";
+    }
+  });
+</script>
+
+<div class="container" bind:this={container}>
   <div class="hidden__container" />
   <slot />
 </div>
@@ -12,7 +23,6 @@
     width: 100%;
     height: 100%;
     position: relative;
-    background-image: url("https://w.wallhaven.cc/full/1p/wallhaven-1poo61.jpg");
   }
   .hidden__container {
     position: absolute;
