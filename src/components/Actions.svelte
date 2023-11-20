@@ -1,9 +1,6 @@
 <script lang="ts">
-  import { getContext, onMount } from "svelte";
-  import type { Wallpaper } from "../interfaces/Wallpaper";
-  const wallpaper: Wallpaper = getContext("wallpaper");
-  wallpaper.setWallpaper("https://w.wallhaven.cc/full/5g/wallhaven-5gpv25.jpg");
-
+  import { onMount } from "svelte";
+  export let onClick: () => void;
   onMount(() => {
     const theme = localStorage.getItem("theme");
     switch (theme) {
@@ -40,7 +37,7 @@
 
 <div class="btn__wrapper">
   <button on:click={changeTheme} type="button">theme</button>
-  <input type="text" name="wallpaper_link" id="wallpaper_link" />
+  <button on:click={onClick} type="button">wallpaper</button>
 </div>
 
 <style>
@@ -52,6 +49,7 @@
   .btn__wrapper button {
     background: none;
     color: var(--fg);
+    margin-left: 0.375rem
   }
   .btn__wrapper button:hover {
     color: var(--purple-color);
