@@ -16,13 +16,12 @@
     renderLinks = !renderLinks;
   };
 
-  let renderModal = true;
+  let renderModal = false;
   const renderModalToggle = () => {
     renderModal = !renderModal;
   };
 
   // context
-
   const wallpaper = writable();
   const setWallpaper = (url: string) => {
     wallpaper.set(url);
@@ -44,13 +43,16 @@
     if (newWallpaper) {
       setWallpaper(newWallpaper);
       localStorage.setItem("wallpaper", newWallpaper);
+      renderModalToggle();
       form.reset();
     }
   };
 
   const handleDelete = () => {
-    
-  }
+    localStorage.removeItem("wallpaper");
+    setWallpaper("");
+    renderModalToggle();
+  };
 
   onMount(() => {
     const savedWallpaper = localStorage.getItem("wallpaper");
@@ -68,7 +70,7 @@
         <input type="text" name="url" placeholder="wallpaper url..." />
         <div class="wallpaper__button__wrapper">
           <button type="submit"> Send </button>
-          <button type="button"> Remove </button>
+          <button type="button" on:click={handleDelete}> Remove </button>
         </div>
       </form>
     </Modal>
@@ -83,7 +85,7 @@
         Mydia
       </h1>
       <Links links={mydia} />
-      <h1 class="links__title">
+      <h1 class="title">
         <i class="nf nf-fa-comments_o" />
         Com
       </h1>

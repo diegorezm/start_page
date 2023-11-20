@@ -8,16 +8,22 @@
 
   const updateBackground = (value: string) => {
     url = value;
+    // FIX: duplicated code
     if (container && url) {
       container.style.backgroundImage = `url(${url})`;
+    } else if (value === "") {
+      container.style.backgroundImage = `var(--gradient-bg)`;
     }
   };
 
   const unsubscribe = wallpaper.wallpaper.subscribe(updateBackground);
 
   onMount(() => {
+    // FIX: duplicated code
     if (container && url) {
       container.style.backgroundImage = `url(${url})`;
+    } else if (url === "") {
+      container.style.backgroundImage = `var(--gradient-bg)`;
     }
   });
   onDestroy(() => {
@@ -40,7 +46,6 @@
     height: 100%;
     position: relative;
     color: var(--fg);
-    background-color: var(--base);
     background-position: center;
     background-size: cover;
   }
