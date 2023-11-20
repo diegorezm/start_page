@@ -1,38 +1,48 @@
 <script>
+  import { setContext } from "svelte";
+  import { writable } from "svelte/store";
+
   import Container from "../components/Container.svelte";
   import Links from "../components/Links.svelte";
   import Icon from "../components/Icon.svelte";
   import Clock from "../components/Clock.svelte";
   import Actions from "../components/Actions.svelte";
+  import Modal from "../components/Modal.svelte";
 
-  import { setContext } from "svelte";
-  import { writable } from "svelte/store";
+  let renderLinks = true;
+  const renderLinksToggle = () => {
+    renderLinks = !renderLinks;
+  };
+
+  let renderModal = false;
+  const renderModalToggle = () => {
+    renderModal = !renderModal;
+  };
 
   const wallpaper = writable();
 
-  const setWallpaper = (url) => {
+  const setWallpaper = (/** @type {string} */ url) => {
     wallpaper.set(url);
-  }
+  };
 
-  setContext('wallpaper', { 
+  setContext("wallpaper", {
     wallpaper,
-    setWallpaper
-  })
+    setWallpaper,
+  });
 
   export let data;
   const { mydia, com } = data;
-
-  let renderLinks = true;
-
-  const onClick = () => {
-    renderLinks = !renderLinks;
-  };
 </script>
 
 <Container>
+  {#if renderModal}
+    <Modal toggle={renderModalToggle}>
+      teste
+    </Modal>
+  {/if}
   <Clock />
-  <Actions />
-  <Icon {onClick} />
+  <Actions onClick={renderModalToggle} />
+  <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
     <section class="links__container">
       <h1 class="links__title">
