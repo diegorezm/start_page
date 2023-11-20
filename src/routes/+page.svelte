@@ -44,26 +44,32 @@
     if (newWallpaper) {
       setWallpaper(newWallpaper);
       localStorage.setItem("wallpaper", newWallpaper);
+      form.reset();
     }
   };
 
+  const handleDelete = () => {
+    
+  }
 
   onMount(() => {
-    const savedWallpaper = localStorage.getItem('wallpaper');
+    const savedWallpaper = localStorage.getItem("wallpaper");
     if (savedWallpaper) {
       setWallpaper(savedWallpaper);
     }
   });
-
 </script>
 
 <Container>
   {#if renderModal}
     <Modal toggle={renderModalToggle}>
-      <form on:submit|preventDefault={handleSubmit}>
-        <input type="text" name="url" />
-        <button type="submit" />Send<button />
-        <button />Delete<button />
+      <form on:submit|preventDefault={handleSubmit} class="wallpaper__form">
+        <h1 class="title">Wallpaper</h1>
+        <input type="text" name="url" placeholder="wallpaper url..." />
+        <div class="wallpaper__button__wrapper">
+          <button type="submit"> Send </button>
+          <button type="button"> Remove </button>
+        </div>
       </form>
     </Modal>
   {/if}
@@ -72,7 +78,7 @@
   <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
     <section class="links__container">
-      <h1 class="links__title">
+      <h1 class="title">
         <i class="nf nf-cod-file_media" />
         Mydia
       </h1>
@@ -87,6 +93,7 @@
 </Container>
 
 <style>
+  /* main container styles */
   .links__container {
     display: flex;
     position: relative;
@@ -108,7 +115,64 @@
     box-shadow: 0px 4px 4px var(--pink-color);
   }
 
-  .links__title {
+  /* modal styles */
+  .wallpaper__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 50%;
+    background-image: var(--gradient-bg);
+    background-size: cover;
+    background-position: center;
+    gap: 1em;
+    border-radius: var(--radius);
+  }
+  .wallpaper__form input {
+    color: var(--fg-color);
+    padding-left: 0.8em;
+    height: 3rem;
+    width: 50%;
+    background-color: var(--base);
+    border: 2px solid var(--fg);
+    border-radius: var(--radius);
+  }
+  .wallpaper__form input:focus {
+    outline: none;
+    border: 2px solid var(--pink-color);
+  }
+  .wallpaper__button__wrapper {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+    width: 50%;
+    height: 10%;
+  }
+  .wallpaper__button__wrapper button {
+    width: 50%;
+    border-radius: var(--radius);
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  .wallpaper__button__wrapper button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  .wallpaper__button__wrapper button[type="submit"] {
+    background: linear-gradient(var(--pink-color), var(--purple-color));
+    font-weight: 700;
+  }
+
+  .wallpaper__button__wrapper button[type="button"] {
+    background-color: var(--red-color);
+    font-weight: 700;
+  }
+
+  /* h1 style */
+  .title {
     color: var(--pink-color);
     font-size: 2.5em;
     font-weight: 700;
@@ -116,6 +180,7 @@
     padding: 0.1em;
   }
 
+  /* media query */
   @media (min-width: 1440px) {
     .links__container {
       width: 50%;
