@@ -31,7 +31,7 @@
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    top:1em;
+    top:0.5em;
     left: 0;
     right: 0;
     text-align: center;
