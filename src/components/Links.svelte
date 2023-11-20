@@ -4,12 +4,25 @@
 </script>
 
 <ul class="list">
-{#each links as link}
-  <li class="link__wrapper">
-    <h1>
-      <i class={`nf ${link.icon}`}/>
-      <a href={link.link} target="_blank">{link.title}</a>
-    </h1>
-  </li>    
-{/each}
+  {#each links as link}
+    <li class="link__wrapper">
+      <h1>
+        <i class={`nf ${link.icon}`} />
+        <a href={link.link} target="_blank">{link.title}</a>
+      </h1>
+    </li>
+  {/each}
 </ul>
+
+<style>
+  .list {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    font-size: 2rem;
+  }
+  li:hover,
+  a:hover {
+    color: var(--purple-color);
+  }
+</style>
