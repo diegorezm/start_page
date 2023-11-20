@@ -17,19 +17,15 @@
   ul {
     list-style: none;
   }
+ 
 
   /* -------------------------- */
 
-  html,
-  body {
-    height: 100vh;
-    line-height: 1;
-  }
 
 
   :root {
     font-family: 'Roboto', sans-serif;
-    --foreground: #b3b1ad;
+    --fg: #b3b1ad;
     --base: #0a0e14;
     --gradient-bg: linear-gradient(to right bottom, #0a0e14, #0b0f15, #0b0f16, #0c1016, #0d1017);
     --crust: #0D1017;
@@ -40,10 +36,23 @@
 
   [data-theme="macchiato"] {
     --base: #24273A;
-    --foreground: #CAD3F5;
+    --fg: #CAD3F5;
     --red-color: #ed8796;
     --purple-color: #c6a0f6;
     --pink-color: #f5bde6;
     --crust: #181926;
     --gradient-bg: linear-gradient(to bottom, #24273a, #212335, #1e2030, #1b1c2b, #181926);
+  }
+
+  html,
+  body {
+    height: 100vh;
+    line-height: 1;
+    color:var(--fg);
+    background-color: var(--base);
+  }
+
+  a{
+    color:var(--fg);
+    text-decoration: none;
   }
