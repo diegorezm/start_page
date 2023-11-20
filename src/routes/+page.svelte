@@ -3,8 +3,15 @@
   import Container from "../components/Container.svelte";
   import Links from "../components/Links.svelte";
   import Icon from "../components/Icon.svelte";
+  import Clock from "../components/Clock.svelte";
   export let data;
   const { mydia, com } = data;
+
+  let renderLinks = true;
+
+  const onClick = () => {
+    renderLinks = !renderLinks;
+  };
 
   onMount(() => {
     const theme = localStorage.getItem("theme");
@@ -20,6 +27,7 @@
         break;
     }
   });
+
   function changeTheme() {
     const attr = document.body.getAttribute("data-theme");
     switch (attr) {
@@ -44,22 +52,24 @@
     <button on:click={changeTheme} type="button">theme</button>
   </div>
 
-  <Icon/>
+  <Clock />
 
-  <section class="links__container">
-    <h1 class="links__title">
-      <i class="nf nf-cod-file_media" />
-      Mydia
-    </h1>
-    <Links links={mydia} />
-    <h1 class="links__title">
-      <i class="nf nf-fa-comments_o" />
-      Com
-    </h1>
-    <Links links={com} />
-  </section>
+  <Icon {onClick} />
+  {#if renderLinks}
+    <section class="links__container">
+      <h1 class="links__title">
+        <i class="nf nf-cod-file_media" />
+        Mydia
+      </h1>
+      <Links links={mydia} />
+      <h1 class="links__title">
+        <i class="nf nf-fa-comments_o" />
+        Com
+      </h1>
+      <Links links={com} />
+    </section>
+  {/if}
 </Container>
-
 
 <style>
   .btn__wrapper {
@@ -85,6 +95,9 @@
     gap: 1rem;
     width: 60%;
     height: 50%;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
     border: 1px solid var(--pink-color);
     border-radius: var(--radius);
     background-image: var(--gradient-bg);
@@ -100,5 +113,12 @@
     font-weight: 700;
     text-align: center;
     padding: 0.1em;
+  }
+
+  @media (min-width: 1440px) {
+    .links__container {
+      width: 50%;
+      height: 40%;
+    }
   }
 </style>
