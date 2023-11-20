@@ -1,7 +1,7 @@
 <script lang="ts">
   import { setContext } from "svelte";
   import { writable } from "svelte/store";
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   import Container from "../components/Container.svelte";
   import Links from "../components/Links.svelte";
@@ -9,6 +9,7 @@
   import Clock from "../components/Clock.svelte";
   import Actions from "../components/Actions.svelte";
   import Modal from "../components/Modal.svelte";
+  import { isImageURL, isURL } from "../helpers";
 
   // conditional rendering
   let renderLinks = true;
@@ -31,6 +32,8 @@
     setWallpaper,
   });
 
+  let errorMsg: string | null;
+
   // links data
   export let data;
   const { mydia, com } = data;
@@ -40,10 +43,19 @@
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     const newWallpaper = String(formData.get("url"));
+    if (!isURL(newWallpaper)) {
+      errorMsg = "Please provide a valid url.";
+      return;
+    }
+    if (!isImageURL(newWallpaper)) {
+      errorMsg = "Please provide a image.";
+      return;
+    }
     if (newWallpaper) {
       setWallpaper(newWallpaper);
       localStorage.setItem("wallpaper", newWallpaper);
       renderModalToggle();
+      errorMsg = "";
       form.reset();
     }
   };
@@ -60,6 +72,10 @@
       setWallpaper(savedWallpaper);
     }
   });
+
+  onDestroy(() => {
+    errorMsg = null;
+  });
 </script>
 
 <Container>
@@ -68,6 +84,11 @@
       <form on:submit|preventDefault={handleSubmit} class="wallpaper__form">
         <h1 class="title">Wallpaper</h1>
         <input type="text" name="url" placeholder="wallpaper url..." />
+        {#if errorMsg}
+          <div class="error__wrapper">
+            <span>{errorMsg}</span>
+          </div>
+        {/if}
         <div class="wallpaper__button__wrapper">
           <button type="submit"> Send </button>
           <button type="button" on:click={handleDelete}> Remove </button>
@@ -172,6 +193,12 @@
     background-color: var(--red-color);
     font-weight: 700;
   }
+
+  /* error style */
+  .error__wrapper{
+    
+  }
+
 
   /* h1 style */
   .title {
