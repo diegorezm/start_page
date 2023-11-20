@@ -25,16 +25,18 @@
 
   :root {
     font-family: 'Roboto', sans-serif;
+    --radius: 1em;
     --fg: #b3b1ad;
     --base: #0a0e14;
-    --gradient-bg: linear-gradient(to right bottom, #0a0e14, #0b0f15, #0b0f16, #0c1016, #0d1017);
     --crust: #0D1017;
     --red-color: #F26D78;
     --purple-color: #6C5980;
     --pink-color: #D2A6FF;
+    --gradient-bg: linear-gradient(to right bottom, #0a0e14, #0b0f15, #0b0f16, #0c1016, #0d1017);
   }
 
   [data-theme="macchiato"] {
+    --radius: 1em;
     --base: #24273A;
     --fg: #CAD3F5;
     --red-color: #ed8796;
