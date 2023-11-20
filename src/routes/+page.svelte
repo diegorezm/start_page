@@ -1,9 +1,9 @@
 <script>
-  import { onMount } from "svelte";
   import Container from "../components/Container.svelte";
   import Links from "../components/Links.svelte";
   import Icon from "../components/Icon.svelte";
   import Clock from "../components/Clock.svelte";
+  import Actions from "../components/Actions.svelte";
   export let data;
   const { mydia, com } = data;
 
@@ -12,48 +12,11 @@
   const onClick = () => {
     renderLinks = !renderLinks;
   };
-
-  onMount(() => {
-    const theme = localStorage.getItem("theme");
-    switch (theme) {
-      case "ayu":
-        document.body.setAttribute("data-theme", "ayu");
-        break;
-      case "macchiato":
-        document.body.setAttribute("data-theme", "macchiato");
-        break;
-      default:
-        document.body.setAttribute("data-theme", "ayu");
-        break;
-    }
-  });
-
-  function changeTheme() {
-    const attr = document.body.getAttribute("data-theme");
-    switch (attr) {
-      case "ayu":
-        document.body.setAttribute("data-theme", "macchiato");
-        localStorage.setItem("theme", "macchiato");
-        break;
-      case "macchiato":
-        document.body.setAttribute("data-theme", "ayu");
-        localStorage.setItem("theme", "ayu");
-        break;
-      default:
-        document.body.setAttribute("data-theme", "ayu");
-        localStorage.setItem("theme", "ayu");
-        break;
-    }
-  }
 </script>
 
 <Container>
-  <div class="btn__wrapper">
-    <button on:click={changeTheme} type="button">theme</button>
-  </div>
-
   <Clock />
-
+  <Actions />
   <Icon {onClick} />
   {#if renderLinks}
     <section class="links__container">
@@ -72,20 +35,6 @@
 </Container>
 
 <style>
-  .btn__wrapper {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-  }
-  .btn__wrapper button {
-    background: none;
-    color: var(--fg);
-  }
-  .btn__wrapper button:hover {
-    color: var(--purple-color);
-    cursor: pointer;
-  }
-
   .links__container {
     display: flex;
     position: relative;
@@ -104,7 +53,7 @@
   }
 
   .links__container:hover {
-    box-shadow: 0px 2px 2px var(--pink-color);
+    box-shadow: 0px 4px 4px var(--pink-color);
   }
 
   .links__title {
