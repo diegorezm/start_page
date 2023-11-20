@@ -58,3 +58,6 @@
     color:var(--fg);
     text-decoration: none;
   }
+  button:hover{
+    cursor: pointer;
+  }
