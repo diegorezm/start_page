@@ -48,7 +48,7 @@
       return;
     }
     if (!isImageURL(newWallpaper)) {
-      errorMsg = "Please provide a image.";
+      errorMsg = "Please provide a valid image.";
       return;
     }
     if (newWallpaper) {
@@ -195,10 +195,12 @@
   }
 
   /* error style */
-  .error__wrapper{
-    
+  .error__wrapper {
+    width: 50%;
   }
-
+  .error__wrapper span {
+    color: var(--red-color);
+  }
 
   /* h1 style */
   .title {
