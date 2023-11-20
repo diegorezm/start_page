@@ -4,6 +4,21 @@
   import Icon from "../components/Icon.svelte";
   import Clock from "../components/Clock.svelte";
   import Actions from "../components/Actions.svelte";
+
+  import { setContext } from "svelte";
+  import { writable } from "svelte/store";
+
+  const wallpaper = writable();
+
+  const setWallpaper = (url) => {
+    wallpaper.set(url);
+  }
+
+  setContext('wallpaper', { 
+    wallpaper,
+    setWallpaper
+  })
+
   export let data;
   const { mydia, com } = data;
 

@@ -1,10 +1,18 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { getContext, onMount } from "svelte";
+  import type { Wallpaper } from "../interfaces/Wallpaper";
+  const wallpaper: Wallpaper = getContext("wallpaper");
+
   let container: HTMLDivElement;
+  let url: string;
+
+  wallpaper.wallpaper.subscribe((value: string) => {
+    url = value;
+  });
+
   onMount(() => {
-    if (container) {
-      container.style.backgroundImage =
-        "url(https://w.wallhaven.cc/full/1p/wallhaven-1poo61.jpg)";
+    if (container && url) {
+      container.style.backgroundImage = `url(${url})`;
     }
   });
 </script>
@@ -23,6 +31,8 @@
     width: 100%;
     height: 100%;
     position: relative;
+    background-position: center;
+    background-size: cover;
   }
   .hidden__container {
     position: absolute;
