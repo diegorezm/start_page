@@ -31,9 +31,12 @@
     width: 100%;
     height: 100%;
     position: relative;
+    color:var(--fg);
+    background-color: var(--base);
     background-position: center;
     background-size: cover;
   }
+  
   .hidden__container {
     position: absolute;
     background: rgba(0, 0, 0, 0.6);
