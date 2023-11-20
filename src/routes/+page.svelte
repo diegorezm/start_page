@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
   import { setContext } from "svelte";
   import { writable } from "svelte/store";
+  import { onMount } from "svelte";
 
   import Container from "../components/Container.svelte";
   import Links from "../components/Links.svelte";
@@ -9,35 +10,61 @@
   import Actions from "../components/Actions.svelte";
   import Modal from "../components/Modal.svelte";
 
+  // conditional rendering
   let renderLinks = true;
   const renderLinksToggle = () => {
     renderLinks = !renderLinks;
   };
 
-  let renderModal = false;
+  let renderModal = true;
   const renderModalToggle = () => {
     renderModal = !renderModal;
   };
 
-  const wallpaper = writable();
+  // context
 
-  const setWallpaper = (/** @type {string} */ url) => {
+  const wallpaper = writable();
+  const setWallpaper = (url: string) => {
     wallpaper.set(url);
   };
-
   setContext("wallpaper", {
     wallpaper,
     setWallpaper,
   });
 
+  // links data
   export let data;
   const { mydia, com } = data;
+
+  // handle form
+  const handleSubmit = (e: Event) => {
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const newWallpaper = String(formData.get("url"));
+    if (newWallpaper) {
+      setWallpaper(newWallpaper);
+      localStorage.setItem("wallpaper", newWallpaper);
+    }
+  };
+
+
+  onMount(() => {
+    const savedWallpaper = localStorage.getItem('wallpaper');
+    if (savedWallpaper) {
+      setWallpaper(savedWallpaper);
+    }
+  });
+
 </script>
 
 <Container>
   {#if renderModal}
     <Modal toggle={renderModalToggle}>
-      teste
+      <form on:submit|preventDefault={handleSubmit}>
+        <input type="text" name="url" />
+        <button type="submit" />Send<button />
+        <button />Delete<button />
+      </form>
     </Modal>
   {/if}
   <Clock />
