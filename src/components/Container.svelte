@@ -13,8 +13,6 @@
     }
   };
 
-
-
   const unsubscribe = wallpaper.wallpaper.subscribe(updateBackground);
 
   onMount(() => {
