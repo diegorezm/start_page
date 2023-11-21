@@ -1,4 +1,8 @@
 <script lang="ts">
+  import icon1 from "$lib/icons/icon.png";
+  import icon2 from "$lib/icons/icon2.png";
+  import icon3 from "$lib/icons/icon3.png";
+
   export let onClick: () => void;
 
   const random = (min: number, max: number) => {
@@ -6,10 +10,10 @@
   };
 
   const getRandomIcon = (index: number) => {
-    const icons = ["/icons/icon.png", "/icons/icon2.png", "/icons/icon3.png"];
+    const icons = [icon1, icon2, icon3];
     return icons[index];
   };
-  
+
   const iconIndex = random(0, 2);
   const icon = getRandomIcon(iconIndex);
 </script>
@@ -48,7 +52,7 @@
     border-radius: 9999px;
   }
 
-  button{
+  button {
     background: none;
   }
 

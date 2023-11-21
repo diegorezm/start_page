@@ -8,10 +8,10 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		paths: {
-			base: '/start_page/'
+			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
 		}
 	}
-	
+
 };
 
 export default config;
