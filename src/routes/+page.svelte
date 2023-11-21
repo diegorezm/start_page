@@ -62,6 +62,7 @@
 
   const handleDelete = () => {
     localStorage.removeItem("wallpaper");
+    errorMsg = "";
     setWallpaper("");
     renderModalToggle();
   };
@@ -80,7 +81,7 @@
 
 <Container>
   {#if renderModal}
-    <Modal toggle={renderModalToggle}>
+    <Modal toggle={renderModalToggle} {renderModal }>
       <form on:submit|preventDefault={handleSubmit} class="wallpaper__form">
         <h1 class="title">Wallpaper</h1>
         <input type="text" name="url" placeholder="wallpaper url..." />
