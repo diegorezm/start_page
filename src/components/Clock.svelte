@@ -2,8 +2,12 @@
   import { onMount } from "svelte";
 
   const getCurrentTime = () => {
+    const lang = navigator.language || "pt-BR"
     const date = new Date();
-    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    return date.toLocaleTimeString(lang, {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
 
   let currentTime = getCurrentTime();
@@ -31,14 +35,14 @@
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    top:0.5em;
+    top: 0.5em;
     left: 0;
     right: 0;
     text-align: center;
     font-size: 1.5rem;
   }
-  @media(max-width: 400px){
-    .clock__wrapper{
+  @media (max-width: 400px) {
+    .clock__wrapper {
       left: 72%;
     }
   }

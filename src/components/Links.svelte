@@ -6,8 +6,10 @@
 <ul class="list">
   {#each links as link}
     <li class="link__wrapper">
-      <i class={`nf ${link.icon}`} />
-      <a href={link.link} target="_blank">{link.title}</a>
+      <a href={link.link} target="_blank">
+        <i class={`nf ${link.icon}`} />
+        {link.title}
+      </a>
     </li>
   {/each}
 </ul>
