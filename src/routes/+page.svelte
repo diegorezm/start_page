@@ -81,7 +81,7 @@
 
 <Container>
   {#if renderModal}
-    <Modal toggle={renderModalToggle} {renderModal }>
+    <Modal toggle={renderModalToggle} {renderModal}>
       <form on:submit|preventDefault={handleSubmit} class="wallpaper__form">
         <h1 class="title">Wallpaper</h1>
         <input type="text" name="url" placeholder="wallpaper url..." />
@@ -162,6 +162,7 @@
     border: 2px solid var(--fg);
     border-radius: var(--radius);
   }
+
   .wallpaper__form input:focus {
     outline: none;
     border: 2px solid var(--pink-color);
@@ -215,8 +216,19 @@
   /* media query */
   @media (min-width: 1440px) {
     .links__container {
-      width: 50%;
+      width: 60%;
       height: 40%;
+    }
+  }
+
+  @media (max-width: 1140px) {
+    .links__container {
+      flex-direction: column;
+      height: fit-content;
+      gap: 0.5rem;
+    }
+    .wallpaper__form {
+      width: 75%;
     }
   }
 </style>

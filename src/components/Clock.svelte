@@ -37,4 +37,9 @@
     text-align: center;
     font-size: 1.5rem;
   }
+  @media(max-width: 400px){
+    .clock__wrapper{
+      left: 72%;
+    }
+  }
 </style>

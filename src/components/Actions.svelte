@@ -42,17 +42,25 @@
 
 <style>
   .btn__wrapper {
-    position: absolute;
+    display: hidden;
     top: 1em;
     right: 1em;
   }
   .btn__wrapper button {
     background: none;
+    display: hidden;
     color: var(--fg);
-    margin-left: 0.375rem
+    margin-left: 0.375rem;
   }
   .btn__wrapper button:hover {
     color: var(--purple-color);
     cursor: pointer;
+  }
+
+  @media(min-width: 575px){
+    .btn__wrapper{
+      display: block;
+      position: absolute;
+    }
   }
 </style>
