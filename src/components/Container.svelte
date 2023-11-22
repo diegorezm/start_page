@@ -8,7 +8,6 @@
 
   const updateBackground = (value: string) => {
     url = value;
-    // FIX: duplicated code
     if (container && url) {
       container.style.backgroundImage = `url(${url})`;
     } else if (value === "") {
@@ -19,12 +18,7 @@
   const unsubscribe = wallpaper.wallpaper.subscribe(updateBackground);
 
   onMount(() => {
-    // FIX: duplicated code
-    if (container && url) {
-      container.style.backgroundImage = `url(${url})`;
-    } else if (url === "") {
-      container.style.backgroundImage = `var(--gradient-bg)`;
-    }
+    updateBackground(url);
   });
   onDestroy(() => {
     unsubscribe();
