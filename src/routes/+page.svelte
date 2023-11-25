@@ -213,22 +213,21 @@
     padding: 0.1em;
   }
 
-  /* media query */
-  @media (min-width: 1440px) {
+  @media (max-width: 1250px) {
     .links__container {
-      width: 60%;
-      height: 40%;
-    }
-  }
-
-  @media (max-width: 1140px) {
-    .links__container {
-      flex-direction: column;
-      height: fit-content;
-      gap: 0.5rem;
+      width:80%;
     }
     .wallpaper__form {
       width: 75%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .links__container {
+      width:90%;
+      flex-direction:column;
+      height: fit-content;
+      gap: 0.5rem;
     }
   }
 </style>

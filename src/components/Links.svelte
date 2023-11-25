@@ -27,7 +27,7 @@
     color: var(--purple-color);
   }
 
-  @media (max-width: 1140px) {
+  @media (max-width: 768px) {
     .list {
       flex-direction: column;
       gap: 1em;
