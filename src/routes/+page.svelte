@@ -213,6 +213,12 @@
     padding: 0.1em;
   }
 
+@media (min-width: 1440px) {
+  .links__container {
+      width:60%;
+      height:40%;
+    }
+}
   @media (max-width: 1250px) {
     .links__container {
       width:80%;
@@ -231,4 +237,5 @@
       padding:0.5rem;
     }
   }
+
 </style>
