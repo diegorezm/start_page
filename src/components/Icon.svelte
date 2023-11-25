@@ -56,14 +56,18 @@
     background: none;
   }
 
-  img:hover {
-    transform: rotate(180deg);
-    cursor: pointer;
-  }
   @media (min-width: 1440px) {
     img {
       width: 12rem;
       height: 12rem;
     }
+  }
+
+  @media (min-width: 1250px) {
+    img:hover {
+      transform: rotate(180deg);
+      cursor: pointer;
+  }
+
   }
 </style>
