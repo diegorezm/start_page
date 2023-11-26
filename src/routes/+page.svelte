@@ -102,16 +102,8 @@
   <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
     <section class="links__container">
-      <h1 class="title">
-        <i class="nf nf-cod-file_media" />
-        Mydia
-      </h1>
-      <Links links={mydia} />
-      <h1 class="title">
-        <i class="nf nf-fa-comments_o" />
-        Com
-      </h1>
-      <Links links={com} />
+      <Links links={mydia} title={"mydia"} icon={"nf-cod-file_media"} />
+      <Links links={com}  title={"com"} icon={"nf-fa-comments_o"}/>
     </section>
   {/if}
 </Container>
