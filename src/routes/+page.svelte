@@ -10,6 +10,26 @@
   import Actions from "../components/Actions.svelte";
   import Modal from "../components/Modal.svelte";
   import { isImageURL, isURL } from "../helpers";
+  import { browser } from "$app/environment";
+
+  // links data
+  export let data;
+
+  // load json
+  const loadData = () => {
+    if (browser) {
+      const localBookmarks = localStorage.getItem("bookmarks");
+      const bookmarks = localBookmarks ? JSON.parse(localBookmarks) : null;
+      if (!bookmarks) {
+        localStorage.setItem("bookmarks", JSON.stringify(data));
+        return bookmarks;
+      }
+      return bookmarks;
+    } else {
+      return data;
+    }
+  };
+  let bookmarks = loadData();
 
   // conditional rendering
   let renderLinks = true;
@@ -33,10 +53,6 @@
   });
 
   let errorMsg: string | null;
-
-  // links data
-  export let data;
-  const { mydia, com } = data;
 
   // handle form
   const handleSubmit = (e: Event) => {
@@ -102,8 +118,12 @@
   <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
     <section class="links__container">
-      <Links links={mydia} title={"mydia"} icon={"nf-cod-file_media"} />
-      <Links links={com}  title={"com"} icon={"nf-fa-comments_o"}/>
+      <Links
+        links={bookmarks.mydia}
+        title={"mydia"}
+        icon={"nf-cod-file_media"}
+      />
+      <Links links={bookmarks.com} title={"com"} icon={"nf-fa-comments_o"} />
     </section>
   {/if}
 </Container>
@@ -205,15 +225,15 @@
     padding: 0.1em;
   }
 
-@media (min-width: 1440px) {
-  .links__container {
-      width:60%;
-      height:40%;
+  @media (min-width: 1440px) {
+    .links__container {
+      width: 60%;
+      height: 40%;
     }
-}
+  }
   @media (max-width: 1250px) {
     .links__container {
-      width:80%;
+      width: 80%;
     }
     .wallpaper__form {
       width: 75%;
@@ -222,12 +242,11 @@
 
   @media (max-width: 768px) {
     .links__container {
-      width:90%;
-      flex-direction:column;
+      width: 90%;
+      flex-direction: column;
       height: fit-content;
       gap: 0.5rem;
-      padding:0.5rem;
+      padding: 0.5rem;
     }
   }
-
 </style>
