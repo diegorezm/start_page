@@ -1,4 +1,4 @@
-import type { Links} from "$lib/interfaces";
+import type { Bookmarks, Links} from "$lib/interfaces";
 import { Tag } from "$lib/interfaces";
 
 const mydia: Links[] = [
@@ -49,10 +49,12 @@ const com: Links[] = [
   },
 ];
 
+const bookmarks: Bookmarks  = {
+  mydia,
+  com
+}
+
 export function load() {
-  return {
-    mydia,
-    com
-  };
+  return bookmarks
 }
 

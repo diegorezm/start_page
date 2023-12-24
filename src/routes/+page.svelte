@@ -9,27 +9,15 @@
   import Clock from "../components/Clock.svelte";
   import Actions from "../components/Actions.svelte";
   import Modal from "../components/Modal.svelte";
-  import { isImageURL, isURL } from "../lib/helpers";
-  import { browser } from "$app/environment";
+  import { isImageURL, isURL } from "../lib/helpers/urlHelper";
+  import { loadBookmark } from "$lib/utils";
+  import type { PageData } from "./$types";
 
-  // links data
-  export let data;
+  // // links data
+  export let data: PageData;
 
   // load json
-  const loadData = () => {
-    if (browser) {
-      const localBookmarks = localStorage.getItem("bookmarks");
-      const bookmarks = localBookmarks ? JSON.parse(localBookmarks) : null;
-      if (!bookmarks) {
-        localStorage.setItem("bookmarks", JSON.stringify(data));
-        return bookmarks;
-      }
-      return bookmarks;
-    } else {
-      return data;
-    }
-  };
-  let bookmarks = loadData();
+  const bookmarks = loadBookmark(data);
 
   // conditional rendering
   let renderLinks = true;
