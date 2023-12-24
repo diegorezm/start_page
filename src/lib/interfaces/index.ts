@@ -1,6 +1,6 @@
 import type { Writable } from "svelte/store";
 
-enum Tag {
+export enum Tag {
   mydia = "mydia",
   com = "com"
 }
