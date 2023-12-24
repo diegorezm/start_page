@@ -4,3 +4,11 @@ export interface Wallpaper{
   wallpaper: Writable<string>,
   setWallpaper: (url: string) => void
 }
+
+export interface Links {
+  id: number,
+  title: string,
+  link: string,
+  icon: string,
+  tag: "mydia" | "com"
+}

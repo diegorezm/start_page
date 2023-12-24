@@ -1,6 +1,5 @@
 import type { Links } from "../interfaces/Links";
 
-
 const mydia: Links[] = [
   {
     id: 1,

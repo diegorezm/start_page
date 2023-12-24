@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getContext, onDestroy, onMount } from "svelte";
   import type { Wallpaper } from "../interfaces/Wallpaper";
-
+    
   const wallpaper: Wallpaper = getContext("wallpaper");
   let container: HTMLDivElement;
   let url: string;

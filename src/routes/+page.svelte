@@ -9,7 +9,7 @@
   import Clock from "../components/Clock.svelte";
   import Actions from "../components/Actions.svelte";
   import Modal from "../components/Modal.svelte";
-  import { isImageURL, isURL } from "../helpers";
+  import { isImageURL, isURL } from "../lib/helpers";
   import { browser } from "$app/environment";
 
   // links data
