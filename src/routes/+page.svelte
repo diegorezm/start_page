@@ -12,13 +12,13 @@
   import { isImageURL, isURL } from "../lib/helpers/urlHelper";
   import { loadBookmark } from "$lib/utils";
   import type { PageData } from "./$types";
+  import { bookmarks } from "$lib/store";
 
   // // links data
   export let data: PageData;
 
   // load json
-  const bookmarks = loadBookmark(data);
-
+  $bookmarks = loadBookmark(data);
   // conditional rendering
   let renderLinks = true;
   const renderLinksToggle = () => {
@@ -107,11 +107,11 @@
   {#if renderLinks}
     <section class="links__container">
       <Links
-        links={bookmarks.mydia}
+        links={$bookmarks.mydia}
         title={"mydia"}
         icon={"nf-cod-file_media"}
       />
-      <Links links={bookmarks.com} title={"com"} icon={"nf-fa-comments_o"} />
+      <Links links={$bookmarks.com} title={"com"} icon={"nf-fa-comments_o"} />
     </section>
   {/if}
 </Container>
