@@ -1,15 +1,15 @@
-import { Tag, type Bookmarks } from "$lib/interfaces"
-import { browser } from "$app/environment"
+import { Tag, type Bookmarks } from "$lib/interfaces";
+import { browser } from "$app/environment";
 
 type CreateJsonData = (data: Bookmarks) => Bookmarks | []
 export const createJsonData: CreateJsonData = (data: Bookmarks) => {
   if (browser) {
     localStorage.setItem("bookmarks", JSON.stringify(data));
-    return data
+    return data;
   } else {
-    return []
+    return [];
   }
-}
+};
 
 type LoadJsonData = () => boolean | Bookmarks
 export const loadJsonData: LoadJsonData = () => {
@@ -19,12 +19,12 @@ export const loadJsonData: LoadJsonData = () => {
       const bookmarks: Bookmarks = JSON.parse(data);
       return bookmarks;
     } else {
-      return false
+      return false;
     }
   } else {
-    return false
+    return false;
   }
-}
+};
 
 type LoadBookmarks = (data?: Bookmarks) => Bookmarks
 export const loadBookmark: LoadBookmarks = (data) => {
@@ -42,4 +42,4 @@ export const loadBookmark: LoadBookmarks = (data) => {
     }, {} as Bookmarks);
     return emptyBookmarks;
   }
-}
+};

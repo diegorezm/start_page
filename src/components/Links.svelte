@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Links } from "../interfaces/Links";
+  import type { Links } from "../lib/interfaces";
   export let links: Links[];
   export let title: string;
   export let icon: string;

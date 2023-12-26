@@ -52,9 +52,9 @@ const com: Links[] = [
 const bookmarks: Bookmarks  = {
   mydia,
   com
-}
+};
 
 export function load() {
-  return bookmarks
+  return bookmarks;
 }
 
