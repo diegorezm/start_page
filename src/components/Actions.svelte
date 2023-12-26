@@ -52,12 +52,13 @@
 
 <style>
   .btn__wrapper {
-    display: hidden;
-    top: 1em;
+    display: none;
+    top: 0.5em;
     right: 1em;
     align-items: center;
     justify-content: center;
     gap: 1em;
+    font-size: 1.2em;
   }
 
   .btn__wrapper button {
