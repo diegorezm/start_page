@@ -22,6 +22,7 @@
       changeTheme(chosenTheme.toLowerCase());
       dropdownText = chosenTheme;
     }
+    showHidenDropdown();
   }
 
   function changeTheme(theme: string) {
