@@ -50,7 +50,6 @@ export const updateBookmark = (link: Links) => {
   const section = bookmarks[tag];
   const updatedSection = section.map(el => {
     if(el.id === link.id){
-      console.log(el);
       return link;
     }
     return el;
