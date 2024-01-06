@@ -148,6 +148,7 @@
       <form on:submit|preventDefault={handleEditSubmit} class="modal__form">
         <h1 class="title">Edit</h1>
         <input type="text" name="id" value={$editFormMetadata.id} hidden />
+        <input type="text" name="tag" value={$editFormMetadata.tag.toString()} hidden />
         <input type="text" name="title" value={$editFormMetadata.title} />
         <input type="text" name="icon" value={$editFormMetadata.icon} />
         <div class="icon__description">
