@@ -10,27 +10,33 @@
   import Actions from "../components/Actions.svelte";
   import Modal from "../components/Modal.svelte";
   import { isImageURL, isURL } from "../lib/helpers/urlHelper";
-  import { loadBookmark } from "$lib/utils";
+  import { createJsonData, loadBookmark, updateBookmark } from "$lib/utils";
+  import { editFormMetadata } from "$lib/store";
   import type { PageData } from "./$types";
+  import type {Links as LinkInterface} from '../lib/interfaces';
   import { bookmarks } from "$lib/store";
-
-  // edit mode
-  let editMode = false;
+  import { Tag } from "$lib/interfaces";
 
   // // links data
   export let data: PageData;
 
   // load json
   $bookmarks = loadBookmark(data);
+
   // conditional rendering
   let renderLinks = true;
   const renderLinksToggle = () => {
     renderLinks = !renderLinks;
   };
-
+  // wallpaper modal
   let renderModal = false;
   const renderModalToggle = () => {
     renderModal = !renderModal;
+  };
+  // edit modal
+  let renderEditModal = false;
+  const renderEditModalToggle = () => {
+    renderEditModal = !renderEditModal;
   };
 
   // context
@@ -45,8 +51,8 @@
 
   let errorMsg: string | null;
 
-  // handle form
-  const handleSubmit = (e: Event) => {
+  // handle wallpaper form
+  const handleWallpaperSubmit = (e: Event) => {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     const newWallpaper = String(formData.get("url"));
@@ -67,11 +73,39 @@
     }
   };
 
-  const handleDelete = () => {
+  const handleWallpaperDelete = () => {
     localStorage.removeItem("wallpaper");
     errorMsg = "";
     setWallpaper("");
     renderModalToggle();
+  };
+
+  // handle edit form
+  const handleEditSubmit = (e: Event) => {
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const newLinkRaw = String(formData.get("link"));
+    const newIcon = String(formData.get("icon"));
+    const newTitle = String(formData.get("title"));
+    const newTagRaw = String(formData.get("tag"));
+    const newTag: () => Tag = () => {
+      if (Object.values(Tag).includes(newTagRaw as Tag)) {
+        return Tag[newTagRaw as keyof typeof Tag];
+      } else {
+        return Tag.com;
+      }
+    };
+    const newId = Number(formData.get("id"));
+    const newLink: LinkInterface = {
+      id: newId,
+      title: newTitle,
+      link: newLinkRaw,
+      icon: newIcon,
+      tag: newTag(),
+    };
+    $bookmarks =  updateBookmark(newLink);
+    createJsonData($bookmarks);
+    renderEditModalToggle();
   };
 
   onMount(() => {
@@ -89,7 +123,10 @@
 <Container>
   {#if renderModal}
     <Modal toggle={renderModalToggle} {renderModal}>
-      <form on:submit|preventDefault={handleSubmit} class="wallpaper__form">
+      <form
+        on:submit|preventDefault={handleWallpaperSubmit}
+        class="modal__form"
+      >
         <h1 class="title">Wallpaper</h1>
         <input type="text" name="url" placeholder="wallpaper url..." />
         {#if errorMsg}
@@ -97,15 +134,39 @@
             <span>{errorMsg}</span>
           </div>
         {/if}
-        <div class="wallpaper__button__wrapper">
+        <div class="modal__button__wrapper">
           <button type="submit"> Send </button>
-          <button type="button" on:click={handleDelete}> Remove </button>
+          <button type="button" on:click={handleWallpaperDelete}>
+            Remove
+          </button>
+        </div>
+      </form>
+    </Modal>
+  {/if}
+  {#if renderEditModal}
+    <Modal toggle={renderEditModalToggle} renderModal={renderEditModal}>
+      <form on:submit|preventDefault={handleEditSubmit} class="modal__form">
+        <h1 class="title">Edit</h1>
+        <input type="text" name="id" value={$editFormMetadata.id} hidden />
+        <input type="text" name="title" value={$editFormMetadata.title} />
+        <input type="text" name="icon" value={$editFormMetadata.icon} />
+        <input type="text" name="link" value={$editFormMetadata.link} />
+        <input
+          type="text"
+          name="tag"
+          value={$editFormMetadata.tag.toString()}
+        />
+        <div class="modal__button__wrapper">
+          <button type="submit"> Send </button>
+          <button type="button" on:click={renderEditModalToggle}>
+            cancel
+          </button>
         </div>
       </form>
     </Modal>
   {/if}
   <Clock />
-  <Actions {renderModalToggle} editMode/>
+  <Actions {renderModalToggle} />
   <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
     <section class="links__container">
@@ -113,8 +174,14 @@
         links={$bookmarks.mydia}
         title={"mydia"}
         icon={"nf-cod-file_media"}
+        {renderEditModalToggle}
       />
-      <Links links={$bookmarks.com} title={"com"} icon={"nf-fa-comments_o"} />
+      <Links
+        links={$bookmarks.com}
+        title={"com"}
+        icon={"nf-fa-comments_o"}
+        {renderEditModalToggle}
+      />
     </section>
   {/if}
 </Container>
@@ -143,20 +210,20 @@
   }
 
   /* modal styles */
-  .wallpaper__form {
+  .modal__form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 40%;
-    height: 50%;
+    height: 60%;
     background-image: var(--gradient-bg);
     background-size: cover;
     background-position: center;
     gap: 1em;
     border-radius: var(--radius);
   }
-  .wallpaper__form input {
+  .modal__form input {
     color: var(--fg-color);
     padding-left: 0.8em;
     height: 3rem;
@@ -166,18 +233,18 @@
     border-radius: var(--radius);
   }
 
-  .wallpaper__form input:focus {
+  .modal__form input:focus {
     outline: none;
     border: 2px solid var(--pink-color);
   }
-  .wallpaper__button__wrapper {
+  .modal__button__wrapper {
     display: flex;
     gap: 1em;
     margin-top: 1em;
     width: 50%;
     height: 10%;
   }
-  .wallpaper__button__wrapper button {
+  .modal__button__wrapper button {
     width: 50%;
     border-radius: var(--radius);
     transition-property: all;
@@ -185,16 +252,16 @@
     transition-duration: 150ms;
   }
 
-  .wallpaper__button__wrapper button:hover {
+  .modal__button__wrapper button:hover {
     cursor: pointer;
     transform: scale(1.1);
   }
-  .wallpaper__button__wrapper button[type="submit"] {
+  .modal__button__wrapper button[type="submit"] {
     background: linear-gradient(var(--pink-color), var(--purple-color));
     font-weight: 700;
   }
 
-  .wallpaper__button__wrapper button[type="button"] {
+  .modal__button__wrapper button[type="button"] {
     background-color: var(--red-color);
     font-weight: 700;
   }
@@ -226,7 +293,7 @@
     .links__container {
       width: 80%;
     }
-    .wallpaper__form {
+    .modal__form {
       width: 75%;
     }
   }

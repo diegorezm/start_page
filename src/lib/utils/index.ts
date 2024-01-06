@@ -1,4 +1,4 @@
-import { Tag, type Bookmarks } from "$lib/interfaces";
+import { Tag, type Bookmarks, type Links } from "$lib/interfaces";
 import { browser } from "$app/environment";
 
 type CreateJsonData = (data: Bookmarks) => Bookmarks | []
@@ -42,4 +42,20 @@ export const loadBookmark: LoadBookmarks = (data) => {
     }, {} as Bookmarks);
     return emptyBookmarks;
   }
+};
+
+export const updateBookmark = (link: Links) => {
+  const bookmarks = loadBookmark();
+  const tag= link.tag;
+  const section = bookmarks[tag];
+  const updatedSection = section.map(el => {
+    if(el.id === link.id){
+      console.log(el);
+      return link;
+    }
+    return el;
+  });
+  bookmarks[tag] = updatedSection;
+  console.log(section);
+  return  bookmarks;
 };

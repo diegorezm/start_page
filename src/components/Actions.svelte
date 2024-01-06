@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { editMode } from "../lib/store";
   import { onMount } from "svelte";
   export let renderModalToggle: () => void;
-  export let editMode: boolean;
   let dropdownText = "";
   let showDropdown = false;
 
@@ -34,10 +34,13 @@
   function showHidenDropdown() {
     showDropdown = !showDropdown;
   }
+  function toggleEditMode() {
+    $editMode = !$editMode;
+  }
 </script>
 
 <div class="btn__wrapper">
-  <button on:click={() => (editMode = !editMode)} type="button">
+  <button on:click={toggleEditMode} type="button">
     <i class="nf nf-cod-edit"></i>
     edit
   </button>
