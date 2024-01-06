@@ -14,6 +14,9 @@
   import type { PageData } from "./$types";
   import { bookmarks } from "$lib/store";
 
+  // edit mode
+  let editMode = false;
+
   // // links data
   export let data: PageData;
 
@@ -102,7 +105,7 @@
     </Modal>
   {/if}
   <Clock />
-  <Actions onClick={renderModalToggle} />
+  <Actions {renderModalToggle} editMode/>
   <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
     <section class="links__container">

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  export let onClick: () => void;
+  export let renderModalToggle: () => void;
+  export let editMode: boolean;
   let dropdownText = "";
   let showDropdown = false;
 
@@ -36,6 +37,10 @@
 </script>
 
 <div class="btn__wrapper">
+  <button on:click={() => (editMode = !editMode)} type="button">
+    <i class="nf nf-cod-edit"></i>
+    edit
+  </button>
   <div class="dropdown">
     <button class="dropdown__btn" on:click={showHidenDropdown}
       >{dropdownText}</button
@@ -47,7 +52,8 @@
       </div>
     {/if}
   </div>
-  <button on:click={onClick} type="button">wallpaper</button>
+
+  <button on:click={renderModalToggle} type="button">wallpaper</button>
 </div>
 
 <style>
