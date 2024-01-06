@@ -6,7 +6,7 @@
   export let title: string;
   export let icon: string;
   export let renderEditModalToggle: () => void;
-  function handleEditFormClick(bookmark: Links){
+  function handleEditFormClick(bookmark: Links) {
     $editFormMetadata = bookmark;
     renderEditModalToggle();
   }
@@ -27,7 +27,10 @@
           {link.title}
         </a>
         {#if $editMode}
-          <button class="edit__btn" on:click={() => handleEditFormClick(link)}>edit</button>
+          <button class="edit__btn" on:click={() => handleEditFormClick(link)}>
+            <i class="nf nf-cod-edit"></i>
+            edit
+          </button>
         {/if}
       </li>
     {/each}
