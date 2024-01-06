@@ -13,11 +13,11 @@
   import { createJsonData, loadBookmark, updateBookmark } from "$lib/utils";
   import { editFormMetadata } from "$lib/store";
   import type { PageData } from "./$types";
-  import type {Links as LinkInterface} from '../lib/interfaces';
+  import type { Links as LinkInterface } from "../lib/interfaces";
   import { bookmarks } from "$lib/store";
   import { Tag } from "$lib/interfaces";
 
-  // // links data
+  // links data
   export let data: PageData;
 
   // load json
@@ -89,7 +89,7 @@
     const newTitle = String(formData.get("title"));
     const newTagRaw = String(formData.get("tag"));
     const newTag: () => Tag = () => {
-      if (Object.values(Tag).includes(newTagRaw as Tag)) {
+      if (newTagRaw in Tag) {
         return Tag[newTagRaw as keyof typeof Tag];
       } else {
         return Tag.com;
@@ -103,7 +103,7 @@
       icon: newIcon,
       tag: newTag(),
     };
-    $bookmarks =  updateBookmark(newLink);
+    $bookmarks = updateBookmark(newLink);
     createJsonData($bookmarks);
     renderEditModalToggle();
   };
@@ -150,12 +150,13 @@
         <input type="text" name="id" value={$editFormMetadata.id} hidden />
         <input type="text" name="title" value={$editFormMetadata.title} />
         <input type="text" name="icon" value={$editFormMetadata.icon} />
+        <div class="icon__description">
+          <span>choose an icon from 
+            <a href="https://www.nerdfonts.com/cheat-sheet">nerdfonts</a>
+            </span>
+        </div>
+
         <input type="text" name="link" value={$editFormMetadata.link} />
-        <input
-          type="text"
-          name="tag"
-          value={$editFormMetadata.tag.toString()}
-        />
         <div class="modal__button__wrapper">
           <button type="submit"> Send </button>
           <button type="button" on:click={renderEditModalToggle}>
@@ -282,7 +283,14 @@
     text-align: center;
     padding: 0.1em;
   }
-
+  .icon__description{
+    width: 50%;
+    font-size: 0.925em;
+  }
+  .icon__description a{
+    color:var(--purple-color);
+  }
+  
   @media (min-width: 1440px) {
     .links__container {
       width: 60%;
