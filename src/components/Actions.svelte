@@ -41,8 +41,14 @@
 
 <div class="btn__wrapper">
   <button on:click={toggleEditMode} type="button">
-    <i class="nf nf-cod-edit"></i>
-    edit
+    {#if $editMode}
+      <i class="nf nf-oct-eye"></i>
+      view mode
+    {:else}
+      <i class="nf nf-cod-edit"></i>
+      edit mode
+    {/if}
+
   </button>
   <div class="dropdown">
     <button class="dropdown__btn" on:click={showHidenDropdown}
