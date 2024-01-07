@@ -46,16 +46,24 @@ export const loadBookmark: LoadBookmarks = (data) => {
 
 export const updateBookmark = (link: Links) => {
   const bookmarks = loadBookmark();
-  const tag= link.tag;
+  const tag = link.tag;
   const section = bookmarks[tag];
   const updatedSection = section.map(el => {
-    if(el.id === link.id){
-      console.log(el);
+    if (el.id === link.id) {
       return link;
     }
     return el;
   });
   bookmarks[tag] = updatedSection;
   console.log(section);
-  return  bookmarks;
+  return bookmarks;
+};
+
+export const deleteBookmark = (link: Links) => {
+  const bookmarks = loadBookmark();
+  const tag = link.tag;
+  const section = bookmarks[tag];
+  const updatedSection = section.filter((el) => el.id !== link.id);
+  bookmarks[tag] = updatedSection;
+  return bookmarks;
 };
