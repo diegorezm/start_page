@@ -11,3 +11,4 @@ export const editFormMetadata: Writable<Links> = writable({
   icon: "",
   tag: Tag.com,
 });
+export const userWallpaper: Writable<string | null>  = writable(null);

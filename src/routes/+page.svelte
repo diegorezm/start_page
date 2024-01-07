@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { setContext } from "svelte";
-  import { writable } from "svelte/store";
   import { onMount, onDestroy } from "svelte";
 
   import Container from "../components/Container.svelte";
@@ -11,7 +9,7 @@
   import Modal from "../components/Modal.svelte";
   import { isImageURL, isURL } from "../lib/helpers/urlHelper";
   import { createJsonData, loadBookmark, updateBookmark } from "$lib/utils";
-  import { editFormMetadata } from "$lib/store";
+  import { editFormMetadata, userWallpaper} from "$lib/store";
   import type { PageData } from "./$types";
   import type { Links as LinkInterface } from "../lib/interfaces";
   import { bookmarks } from "$lib/store";
@@ -39,16 +37,6 @@
     renderEditModal = !renderEditModal;
   };
 
-  // context
-  const wallpaper = writable();
-  const setWallpaper = (url: string) => {
-    wallpaper.set(url);
-  };
-  setContext("wallpaper", {
-    wallpaper,
-    setWallpaper,
-  });
-
   let errorMsg: string | null;
 
   // handle wallpaper form
@@ -65,7 +53,7 @@
       return;
     }
     if (newWallpaper) {
-      setWallpaper(newWallpaper);
+      $userWallpaper = newWallpaper;
       localStorage.setItem("wallpaper", newWallpaper);
       renderModalToggle();
       errorMsg = "";
@@ -76,7 +64,7 @@
   const handleWallpaperDelete = () => {
     localStorage.removeItem("wallpaper");
     errorMsg = "";
-    setWallpaper("");
+    $userWallpaper = null;
     renderModalToggle();
   };
 
@@ -111,7 +99,7 @@
   onMount(() => {
     const savedWallpaper = localStorage.getItem("wallpaper");
     if (savedWallpaper) {
-      setWallpaper(savedWallpaper);
+      $userWallpaper = savedWallpaper;
     }
   });
 
