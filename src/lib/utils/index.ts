@@ -48,6 +48,7 @@ export const updateBookmark = (link: Links) => {
   const bookmarks = loadBookmark();
   const tag = link.tag;
   const section = bookmarks[tag];
+
   const updatedSection = section.map(el => {
     if (el.id === link.id) {
       return link;
@@ -55,7 +56,6 @@ export const updateBookmark = (link: Links) => {
     return el;
   });
   bookmarks[tag] = updatedSection;
-  console.log(section);
   return bookmarks;
 };
 
