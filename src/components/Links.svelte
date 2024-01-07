@@ -13,7 +13,7 @@
   }
   function handleDeleteButtonClick(bookmark: Links) {
     $bookmarks = deleteBookmark(bookmark);
-    // TODO: add a way for the user to add bookarms, untils then i can´t really delete them.
+    // TODO: add a way for the user to add bookarms, until then i can´t really delete them.
     // createJsonData($bookmarks);
   }
 </script>
@@ -92,8 +92,8 @@
     color: var(--fg);
     background: none;
   }
-  @media(min-width: 1440px){
-    .list__wrapper{
+  @media (min-width: 1440px) {
+    .list__wrapper {
       font-size: 2.5em;
     }
   }
