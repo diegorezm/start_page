@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { editMode } from "../lib/store";
+  import { bookmarks, editMode } from "../lib/store";
   import type { Links } from "../lib/interfaces";
   import { editFormMetadata } from "../lib/store";
+  import { deleteBookmark } from "$lib/utils";
   export let links: Links[];
   export let title: string;
   export let icon: string;
@@ -9,6 +10,11 @@
   function handleEditFormClick(bookmark: Links) {
     $editFormMetadata = bookmark;
     renderEditModalToggle();
+  }
+  function handleDeleteButtonClick(bookmark: Links) {
+    $bookmarks = deleteBookmark(bookmark);
+    // TODO: add a way for the user to add bookarms, until then i can´t really delete them.
+    // createJsonData($bookmarks);
   }
 </script>
 
@@ -27,10 +33,22 @@
           {link.title}
         </a>
         {#if $editMode}
-          <button class="edit__btn" on:click={() => handleEditFormClick(link)}>
-            <i class="nf nf-cod-edit"></i>
-            edit
-          </button>
+          <div class="edit__mode__div">
+            <button
+              class="edit__mode__btn"
+              on:click={() => handleDeleteButtonClick(link)}
+            >
+              <i class="nf nf-cod-trash"></i>
+              delete
+            </button>
+            <button
+              class="edit__mode__btn"
+              on:click={() => handleEditFormClick(link)}
+            >
+              <i class="nf nf-cod-edit"></i>
+              edit
+            </button>
+          </div>
         {/if}
       </li>
     {/each}
@@ -58,17 +76,26 @@
     padding: 0.1em;
   }
   li:hover,
-  .edit__btn:hover,
+  .edit__mode__btn:hover,
   a:hover {
     color: var(--purple-color);
   }
-  .edit__btn {
+  .edit__mode__div {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 0.625em;
+    padding: 0.1em;
+  }
+  .edit__mode__btn {
     display: block;
     color: var(--fg);
     background: none;
-    font-size: 0.625em;
-    width: 100%;
-    text-align: end;
+  }
+  @media (min-width: 1440px) {
+    .list__wrapper {
+      font-size: 2.5em;
+    }
   }
   @media (max-width: 768px) {
     .list {
@@ -78,7 +105,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.825em;
-      padding: 0.625em;
+      padding: 0.525em;
     }
   }
 </style>

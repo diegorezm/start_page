@@ -1,27 +1,22 @@
 <script lang="ts">
-  import { getContext, onDestroy, onMount } from "svelte";
-  import type { Wallpaper } from "../lib/interfaces";
-    
-  const wallpaper: Wallpaper = getContext("wallpaper");
+  import { userWallpaper } from "$lib/store";
+  import { onDestroy } from "svelte";
+
   let container: HTMLDivElement;
-  let url: string;
 
-  const updateBackground = (value: string) => {
-    url = value;
-    if (container && url) {
-      container.style.backgroundImage = `url(${url})`;
-    } else if (value === "") {
-      container.style.backgroundImage = `var(--gradient-bg)`;
-    }
+  const updateBackground = (wallpaper: string | null) => {
+    container.style.backgroundImage = wallpaper
+      ? `url(${wallpaper})`
+      : "var(--gradient-bg)";
   };
-
-  const unsubscribe = wallpaper.wallpaper.subscribe(updateBackground);
-
-  onMount(() => {
-    updateBackground(url);
+  
+  const unsub = userWallpaper.subscribe((wallpaper) => {
+    if (container) {
+      updateBackground(wallpaper);
+    }
   });
   onDestroy(() => {
-    unsubscribe();
+    unsub();
   });
 </script>
 
