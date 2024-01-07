@@ -8,11 +8,11 @@
   import Actions from "../components/Actions.svelte";
   import Modal from "../components/Modal.svelte";
   import { loadBookmark } from "$lib/utils";
-  import {  userWallpaper} from "$lib/store";
+  import { userWallpaper } from "$lib/store";
   import type { PageData } from "./$types";
   import { bookmarks } from "$lib/store";
-    import EditBookmarkModal from "../components/EditBookmarkModal.svelte";
-    import UserWallpaperModal from "../components/UserWallpaperModal.svelte";
+  import EditBookmarkModal from "../components/EditBookmarkModal.svelte";
+  import UserWallpaperModal from "../components/UserWallpaperModal.svelte";
 
   // links data
   export let data: PageData;
@@ -42,18 +42,20 @@
       $userWallpaper = savedWallpaper;
     }
   });
-
 </script>
 
 <Container>
   {#if renderWallpaperModal}
-    <Modal toggle={renderWallpaperModalToggle} renderModal={renderWallpaperModal}>
-     <UserWallpaperModal {renderWallpaperModalToggle}/>
+    <Modal
+      toggle={renderWallpaperModalToggle}
+      renderModal={renderWallpaperModal}
+    >
+      <UserWallpaperModal {renderWallpaperModalToggle} />
     </Modal>
   {/if}
   {#if renderEditModal}
     <Modal toggle={renderEditModalToggle} renderModal={renderEditModal}>
-      <EditBookmarkModal {renderEditModalToggle}/>
+      <EditBookmarkModal {renderEditModalToggle} />
     </Modal>
   {/if}
   <Clock />
@@ -100,7 +102,6 @@
     box-shadow: 0px 4px 4px var(--pink-color);
   }
 
-  
   @media (min-width: 1440px) {
     .links__container {
       width: 60%;

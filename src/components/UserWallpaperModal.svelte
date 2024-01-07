@@ -5,7 +5,7 @@
   export let renderWallpaperModalToggle: () => void;
 
   let errorMsg: string | null;
-  // handle wallpaper form
+  
   const handleWallpaperSubmit = (e: Event) => {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
