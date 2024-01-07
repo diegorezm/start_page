@@ -92,6 +92,11 @@
     color: var(--fg);
     background: none;
   }
+  @media(min-width: 1440px){
+    .list__wrapper{
+      font-size: 2.5em;
+    }
+  }
   @media (max-width: 768px) {
     .list {
       gap: 1em;
