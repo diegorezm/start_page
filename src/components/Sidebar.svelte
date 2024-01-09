@@ -1,6 +1,7 @@
 <script lang="ts">
   import WallpaperInput from "./sidebar.components/WallpaperInput.svelte";
-  import ThemeDropdown from './sidebar.components/ThemeDropdown.svelte';
+  import ThemeDropdown from "./sidebar.components/ThemeDropdown.svelte";
+  import ToggleEditMode from "./sidebar.components/ToggleEditMode.svelte";
   export let toggle: () => void;
 </script>
 
@@ -10,27 +11,32 @@
       <i class="nf nf-cod-close" />
     </button>
   </div>
-  
-  <div class="sidebar__component">
-    <h2 class="title">Wallpaper</h2>
-    <WallpaperInput/>
-  </div>
-  
-  <div class="sidebar__separator"></div>
 
   <div class="sidebar__component">
-    <h2 class="title">Theme</h2>
-    <ThemeDropdown/>
+    <div class="title__wrapper">
+      <h2 class="title">Wallpaper</h2>
+    </div>
+    <WallpaperInput />
   </div>
 
   <div class="sidebar__separator"></div>
 
   <div class="sidebar__component">
-    <h2 class="title">Edit mode</h2>
-    <ThemeDropdown/>
+    <div class="title__wrapper">
+      <h2 class="title">Theme</h2>
+    </div>
+    <ThemeDropdown />
+  </div>
+
+  <div class="sidebar__separator"></div>
+
+  <div class="sidebar__component">
+    <div class="title__wrapper">
+      <h2 class="title">Edit mode</h2>
+    </div>
+    <ToggleEditMode />
   </div>
 </section>
-
 
 <style>
   .sidebar {
@@ -71,5 +77,17 @@
     font-size: 1.425rem;
     padding-top: 0.5rem;
     padding-right: 0.5rem;
+  }
+  .title__wrapper{
+    display:flex;
+    justify-content:start;
+    font-size:1.75em;
+    padding-bottom:0.5em;
+  }
+
+  .title {
+    text-align: start;
+    border-bottom:0.1em solid var(--pink-color);
+    border-radius : 0.2em;
   }
 </style>
