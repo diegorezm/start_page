@@ -35,7 +35,7 @@
   });
 </script>
 
-
+  
 <form on:submit|preventDefault={handleWallpaperSubmit}>
   <input type="text" name="url" placeholder="wallpaper url..." />
   {#if errorMsg}
@@ -65,6 +65,7 @@
     border: 2px solid var(--fg);
     border-radius: 0.2em;
     height: 2.225em;
+    font-size:1.225em;
     padding-left: 0.2em;
   }
 
@@ -77,10 +78,16 @@
     display: flex;
     justify-content: space-between;
   }
+  .error__wrapper{
+    display:flex;
+    width:100%;
+    color:var(--red-color);
+    font-size:1.225em;
+  }
   .form__button__wrapper button{
     width: 40%;
     border-radius: 0.2em;
-    height: 1.75em;
+    height: 2.225em;
     font-weight: 700;
     color:var(--crust);
   }
