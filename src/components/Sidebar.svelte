@@ -12,16 +12,25 @@
   </div>
   
   <div class="sidebar__component">
-    <h2>Wallpaper</h2>
+    <h2 class="title">Wallpaper</h2>
     <WallpaperInput/>
   </div>
+  
   <div class="sidebar__separator"></div>
 
   <div class="sidebar__component">
-    <h2>Theme</h2>
+    <h2 class="title">Theme</h2>
+    <ThemeDropdown/>
+  </div>
+
+  <div class="sidebar__separator"></div>
+
+  <div class="sidebar__component">
+    <h2 class="title">Edit mode</h2>
     <ThemeDropdown/>
   </div>
 </section>
+
 
 <style>
   .sidebar {
@@ -36,6 +45,8 @@
     transition: right 0.3s ease-in-out;
   }
   .sidebar__component {
+    position: relative;
+    width: 80%;
     padding: 1em;
     border: 1em var(--fg);
   }
