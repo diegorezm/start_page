@@ -11,6 +11,7 @@
   import type { PageData } from "./$types";
   import { bookmarks } from "$lib/store";
   import Sidebar from "../components/Sidebar.svelte";
+  import EditBookmarkModal from "../components/EditBookmarkModal.svelte";
 
   // links data
   export let data: PageData;
@@ -23,7 +24,7 @@
   const renderLinksToggle = () => {
     renderLinks = !renderLinks;
   };
-  
+
   // edit modal
   let renderEditModal = false;
   const renderEditModalToggle = () => {
@@ -50,8 +51,13 @@
     </button>
   </div>
   {#if showSidebar}
-    <Modal isRendered={showSidebar} >
-      <Sidebar toggle={showSidebarToggle}/>
+    <Modal isRendered={showSidebar}>
+      <Sidebar toggle={showSidebarToggle} />
+    </Modal>
+  {/if}
+  {#if renderEditModal}
+    <Modal isRendered={renderEditModal}>
+      <EditBookmarkModal {renderEditModalToggle} />
     </Modal>
   {/if}
   <Clock />
