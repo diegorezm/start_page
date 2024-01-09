@@ -90,4 +90,15 @@
     border-bottom:0.1em solid var(--pink-color);
     border-radius : 0.2em;
   }
+  @media(max-width: 1024px){
+    .sidebar {
+      width:70%;
+    }
+  }
+
+  @media(max-width: 425px){
+    .sidebar {
+      width:100%;
+    }
+  }
 </style>
