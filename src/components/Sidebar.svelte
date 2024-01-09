@@ -41,7 +41,7 @@
 <style>
   .sidebar {
     display: flex;
-    position: fixed;
+    position: absolute;
     flex-direction: column;
     align-items: center;
     right: 0;
