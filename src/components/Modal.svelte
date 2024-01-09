@@ -1,14 +1,8 @@
 <script lang="ts">
-  export let renderModal: boolean;
-  export let toggle: () => void;
+  export let isRendered: boolean;
 </script>
 
-<div class={`modal__container ${renderModal ? "active" : ""}`}>
-  <div class="moda__btn__close">
-    <button on:click={toggle}>
-      <i class="nf nf-md-close_circle" />
-    </button>
-  </div>
+<div class={`modal__container ${isRendered ? "active" : ""}`}>
   <slot />
 </div>
 
@@ -36,14 +30,7 @@
     position: fixed;
     top: 0.5rem;
     right: 0.5rem;
-    font-size: 2rem;
-  }
-  .moda__btn__close button {
-    background: none;
-    color: var(--red-color);
-  }
-  .moda__btn__close button:hover {
-    cursor: pointer;
-    transform: scale(1.1);
+    font-size: 1.425rem;
+    z-index: 20;
   }
 </style>

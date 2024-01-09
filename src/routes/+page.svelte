@@ -5,14 +5,12 @@
   import Links from "../components/Links.svelte";
   import Icon from "../components/Icon.svelte";
   import Clock from "../components/Clock.svelte";
-  import Actions from "../components/Actions.svelte";
   import Modal from "../components/Modal.svelte";
   import { loadBookmark } from "$lib/utils";
   import { userWallpaper } from "$lib/store";
   import type { PageData } from "./$types";
   import { bookmarks } from "$lib/store";
-  import EditBookmarkModal from "../components/EditBookmarkModal.svelte";
-  import UserWallpaperModal from "../components/UserWallpaperModal.svelte";
+  import Sidebar from "../components/Sidebar.svelte";
 
   // links data
   export let data: PageData;
@@ -25,15 +23,16 @@
   const renderLinksToggle = () => {
     renderLinks = !renderLinks;
   };
-  // wallpaper modal
-  let renderWallpaperModal = false;
-  const renderWallpaperModalToggle = () => {
-    renderWallpaperModal = !renderWallpaperModal;
-  };
+  
   // edit modal
   let renderEditModal = false;
   const renderEditModalToggle = () => {
     renderEditModal = !renderEditModal;
+  };
+
+  let showSidebar = false;
+  let showSidebarToggle = () => {
+    showSidebar = !showSidebar;
   };
 
   onMount(() => {
@@ -45,21 +44,17 @@
 </script>
 
 <Container>
-  {#if renderWallpaperModal}
-    <Modal
-      toggle={renderWallpaperModalToggle}
-      renderModal={renderWallpaperModal}
-    >
-      <UserWallpaperModal {renderWallpaperModalToggle} />
-    </Modal>
-  {/if}
-  {#if renderEditModal}
-    <Modal toggle={renderEditModalToggle} renderModal={renderEditModal}>
-      <EditBookmarkModal {renderEditModalToggle} />
+  <div class="showsidebar">
+    <button class="showsidebar__btn" on:click={showSidebarToggle}>
+      <i class="nf nf-seti-config"></i>
+    </button>
+  </div>
+  {#if showSidebar}
+    <Modal isRendered={showSidebar} >
+      <Sidebar toggle={showSidebarToggle}/>
     </Modal>
   {/if}
   <Clock />
-  <Actions renderModalToggle={renderWallpaperModalToggle} />
   <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
     <section class="links__container">
@@ -100,6 +95,26 @@
 
   .links__container:hover {
     box-shadow: 0px 4px 4px var(--pink-color);
+  }
+
+  .showsidebar {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    transition-delay: 300ms;
+  }
+  .showsidebar__btn {
+    font-size: 2rem;
+    background: none;
+    color: var(--foreground);
+  }
+  .showsidebar:hover {
+    transform: rotate(180deg);
+    cursor: pointer;
   }
 
   @media (min-width: 1440px) {

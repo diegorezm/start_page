@@ -1,0 +1,64 @@
+<script lang="ts">
+  import WallpaperInput from "./sidebar.components/WallpaperInput.svelte";
+  import ThemeDropdown from './sidebar.components/ThemeDropdown.svelte';
+  export let toggle: () => void;
+</script>
+
+<section class="sidebar">
+  <div class="sidebar__close">
+    <button on:click={toggle}>
+      <i class="nf nf-cod-close" />
+    </button>
+  </div>
+  
+  <div class="sidebar__component">
+    <h2>Wallpaper</h2>
+    <WallpaperInput/>
+  </div>
+  <div class="sidebar__separator"></div>
+
+  <div class="sidebar__component">
+    <h2>Theme</h2>
+    <ThemeDropdown/>
+  </div>
+</section>
+
+<style>
+  .sidebar {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    background-color: var(--crust);
+    transition: right 0.3s ease-in-out;
+  }
+  .sidebar__component {
+    padding: 1em;
+    border: 1em var(--fg);
+  }
+  .sidebar__component h2 {
+    text-align: center;
+    padding-bottom: 0.225em;
+  }
+  .sidebar__separator {
+    width: 80%;
+    height: 0.01em;
+    margin: 8px 0;
+    background-color: var(--fg);
+  }
+  .sidebar__close {
+    display: flex;
+    width: 100%;
+    justify-content: end;
+  }
+  .sidebar__close > button {
+    background: none;
+    color: var(--fg);
+    font-size: 1.425rem;
+    padding-top: 0.5rem;
+    padding-right: 0.5rem;
+  }
+</style>
