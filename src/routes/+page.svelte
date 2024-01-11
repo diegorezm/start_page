@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-
+  import { onMount} from "svelte";
   import Container from "../components/Container.svelte";
   import Links from "../components/Links.svelte";
   import Icon from "../components/Icon.svelte";
@@ -119,7 +118,7 @@
     color: var(--foreground);
   }
   .showsidebar:hover {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
     cursor: pointer;
   }
 

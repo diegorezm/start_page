@@ -39,14 +39,12 @@
               on:click={() => handleDeleteButtonClick(link)}
             >
               <i class="nf nf-cod-trash"></i>
-              delete
             </button>
             <button
               class="edit__mode__btn"
               on:click={() => handleEditFormClick(link)}
             >
               <i class="nf nf-cod-edit"></i>
-              edit
             </button>
           </div>
         {/if}
@@ -82,10 +80,11 @@
   }
   .edit__mode__div {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     width: 100%;
     font-size: 0.625em;
     padding: 0.1em;
+    gap:0.5em;
   }
   .edit__mode__btn {
     display: block;

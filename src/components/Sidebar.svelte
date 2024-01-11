@@ -3,6 +3,7 @@
   import ThemeDropdown from "./sidebar.components/ThemeDropdown.svelte";
   import ToggleEditMode from "./sidebar.components/ToggleEditMode.svelte";
   export let toggle: () => void;
+
 </script>
 
 <section class="sidebar">
@@ -78,27 +79,27 @@
     padding-top: 0.5rem;
     padding-right: 0.5rem;
   }
-  .title__wrapper{
-    display:flex;
-    justify-content:start;
-    font-size:1.75em;
-    padding-bottom:0.5em;
+  .title__wrapper {
+    display: flex;
+    justify-content: start;
+    font-size: 1.75em;
+    padding-bottom: 0.5em;
   }
 
   .title {
     text-align: start;
-    border-bottom:0.1em solid var(--pink-color);
-    border-radius : 0.2em;
+    border-bottom: 0.1em solid var(--pink-color);
+    border-radius: 0.2em;
   }
-  @media(max-width: 1024px){
+  @media (max-width: 1024px) {
     .sidebar {
-      width:70%;
+      width: 70%;
     }
   }
 
-  @media(max-width: 425px){
+  @media (max-width: 425px) {
     .sidebar {
-      width:100%;
+      width: 100%;
     }
   }
 </style>

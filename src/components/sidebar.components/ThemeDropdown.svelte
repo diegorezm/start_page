@@ -41,9 +41,13 @@
 
 <!-- TODO: move from <select/> to a proper selection box because this looks horrible-->
 <div class="select__wrapper">
-  <select class="select__box" on:change={handleThemeChange} bind:value={selected}>
-    {#each themes as theme }
-      <option value={theme.theme}>{theme.name}</option> 
+  <select
+    class="select__box"
+    on:change={handleThemeChange}
+    bind:value={selected}
+  >
+    {#each themes as theme}
+      <option value={theme.theme}>{theme.name}</option>
     {/each}
   </select>
   <div class="icon__container">
@@ -52,50 +56,55 @@
 </div>
 
 <style>
-  .select__wrapper{
-    display:flex;
+  .select__wrapper {
+    display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
   }
-  .select__box{
-    display:flex;
+  .select__box {
+    display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     text-align: center;
-    border:2px solid var(--fg);
-    appearance:none;
-    width:75%;
+    border: 2px solid var(--fg);
+    appearance: none;
+    width: 75%;
     height: 2.225em;
-    border-radius:0.2em;
-    padding-left:0.2em;
-    background-color:var(--crust);
-    color:var(--fg);
-    font-size:1.2em;
+    border-radius: 0.2em;
+    padding-left: 0.2em;
+    background-color: var(--crust);
+    color: var(--fg);
+    font-size: 1.2em;
   }
 
-  .select__box:hover{
-    cursor:pointer;
+  .select__box:hover {
+    cursor: pointer;
   }
 
-  .icon__container{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    position:absolute;
-    height:100%;
-    right:35%;
-    width:1em;
-    transition-duration:300ms;
+  .icon__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    height: 100%;
+    right: 25%;
+    width: 1em;
+    transition-duration: 300ms;
   }
 
-  .select__box:focus{
-    outline:none;
-    border:2px solid var(--pink-color);
-  } 
+  .select__box:focus {
+    outline: none;
+    border: 2px solid var(--pink-color);
+  }
 
-  .select__box:focus + .icon__container{
-    transform:rotate(90deg);
+  .select__box:focus + .icon__container {
+    transform: rotate(90deg);
+  }
+  @media (min-width: 1440px) {
+    .icon__container {
+      right: 35%;
+    }
   }
 </style>
