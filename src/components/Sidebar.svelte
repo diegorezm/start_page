@@ -3,43 +3,51 @@
   import ThemeDropdown from "./sidebar.components/ThemeDropdown.svelte";
   import ToggleEditMode from "./sidebar.components/ToggleEditMode.svelte";
   export let toggle: () => void;
-
 </script>
 
-<section class="sidebar">
-  <div class="sidebar__close">
-    <button on:click={toggle}>
-      <i class="nf nf-cod-close" />
-    </button>
-  </div>
-
-  <div class="sidebar__component">
-    <div class="title__wrapper">
-      <h2 class="title">Wallpaper</h2>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div class="click" on:click={toggle}>
+  <section class="sidebar" on:click|stopPropagation>
+    <div class="sidebar__close">
+      <button on:click={toggle}>
+        <i class="nf nf-cod-close" />
+      </button>
     </div>
-    <WallpaperInput />
-  </div>
 
-  <div class="sidebar__separator"></div>
-
-  <div class="sidebar__component">
-    <div class="title__wrapper">
-      <h2 class="title">Theme</h2>
+    <div class="sidebar__component">
+      <div class="title__wrapper">
+        <h2 class="title">Wallpaper</h2>
+      </div>
+      <WallpaperInput />
     </div>
-    <ThemeDropdown />
-  </div>
 
-  <div class="sidebar__separator"></div>
+    <div class="sidebar__separator"></div>
 
-  <div class="sidebar__component">
-    <div class="title__wrapper">
-      <h2 class="title">Edit mode</h2>
+    <div class="sidebar__component">
+      <div class="title__wrapper">
+        <h2 class="title">Theme</h2>
+      </div>
+      <ThemeDropdown />
     </div>
-    <ToggleEditMode />
-  </div>
-</section>
+
+    <div class="sidebar__separator"></div>
+
+    <div class="sidebar__component">
+      <div class="title__wrapper">
+        <h2 class="title">Edit mode</h2>
+      </div>
+      <ToggleEditMode />
+    </div>
+  </section>
+</div>
 
 <style>
+  .click{
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
   .sidebar {
     display: flex;
     position: absolute;
