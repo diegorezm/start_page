@@ -3,22 +3,21 @@
   import { isImageURL, isURL } from "$lib/helpers/urlHelper";
   import { userWallpaper } from "$lib/store";
   let errorMsg: string | null;
+  let wallpaper: string;
 
   const handleWallpaperSubmit = (e: Event) => {
     const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-    const newWallpaper = String(formData.get("url"));
-    if (!isURL(newWallpaper)) {
+    if (!isURL(wallpaper)) {
       errorMsg = "Please provide a valid url.";
       return;
     }
-    if (!isImageURL(newWallpaper)) {
+    if (!isImageURL(wallpaper)) {
       errorMsg = "Please provide a valid image.";
       return;
     }
-    if (newWallpaper) {
-      $userWallpaper = newWallpaper;
-      localStorage.setItem("wallpaper", newWallpaper);
+    if (wallpaper) {
+      $userWallpaper = wallpaper;
+      localStorage.setItem("wallpaper", wallpaper);
       errorMsg = "";
       form.reset();
     }
@@ -27,6 +26,7 @@
   const handleWallpaperDelete = () => {
     localStorage.removeItem("wallpaper");
     errorMsg = "";
+    wallpaper = "";
     $userWallpaper = null;
   };
 
@@ -35,9 +35,13 @@
   });
 </script>
 
-  
-<form on:submit|preventDefault={handleWallpaperSubmit}>
-  <input type="text" name="url" placeholder="wallpaper url..." />
+<form on:submit|preventDefault={handleWallpaperSubmit} id="wallpaper__form">
+  <input
+    type="text"
+    name="url"
+    placeholder="wallpaper url..."
+    bind:value={wallpaper}
+  />
   {#if errorMsg}
     <div class="error__wrapper">
       <span>{errorMsg}</span>
@@ -48,16 +52,17 @@
     <button type="button" on:click={handleWallpaperDelete}> Remove </button>
   </div>
 </form>
+
 <style>
-  form{
+  form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap:0.5em;
+    gap: 0.5em;
   }
-  input{
+  input {
     display: block;
     width: 100%;
     color: var(--fg-color);
@@ -65,36 +70,36 @@
     border: 2px solid var(--fg);
     border-radius: 0.2em;
     height: 2.225em;
-    font-size:1.225em;
+    font-size: 1.225em;
     padding-left: 0.2em;
   }
 
-  input:focus{
+  input:focus {
     outline: none;
     border: 2px solid var(--pink-color);
   }
-  .form__button__wrapper{
+  .form__button__wrapper {
     width: 100%;
     display: flex;
     justify-content: space-between;
   }
-  .error__wrapper{
-    display:flex;
-    width:100%;
-    color:var(--red-color);
-    font-size:1.225em;
+  .error__wrapper {
+    display: flex;
+    width: 100%;
+    color: var(--red-color);
+    font-size: 1.225em;
   }
-  .form__button__wrapper button{
+  .form__button__wrapper button {
     width: 40%;
     border-radius: 0.2em;
     height: 2.225em;
     font-weight: 700;
-    color:var(--crust);
+    color: var(--crust);
   }
-  .form__button__wrapper button[type="button"]{
+  .form__button__wrapper button[type="button"] {
     background-color: var(--red-color);
   }
-  .form__button__wrapper button[type="submit"]{
+  .form__button__wrapper button[type="submit"] {
     background: linear-gradient(var(--pink-color), var(--purple-color));
   }
 </style>
