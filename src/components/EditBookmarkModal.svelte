@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fly } from "svelte/transition";
   import { Tag, type Links } from "$lib/interfaces";
   import { bookmarks, editFormMetadata } from "$lib/store";
   import { createJsonData, updateBookmark } from "$lib/utils";
@@ -39,6 +40,7 @@
   on:submit|preventDefault={handleEditSubmit}
   class="modal__form"
   on:click|stopPropagation
+  transition:fly={{ x: 0, y: 50 }}
 >
   <h1 class="title">Edit</h1>
   <input type="text" name="id" value={$editFormMetadata.id} hidden />
@@ -72,11 +74,15 @@
     justify-content: center;
     width: 40%;
     height: 60%;
+    z-index: 20;
     background-image: var(--gradient-bg);
     background-size: cover;
     background-position: center;
     gap: 1em;
     border-radius: var(--radius);
+    transition:
+      top 0.4s,
+      opacity 0.4s;
   }
 
   .modal__form input {
@@ -102,7 +108,8 @@
   }
   .modal__button__wrapper button {
     width: 50%;
-    border-radius: var(--radius);
+    height: 100%;
+    border-radius: 0.2em;
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
@@ -110,7 +117,7 @@
 
   .modal__button__wrapper button:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.06);
   }
   .modal__button__wrapper button[type="submit"] {
     background: linear-gradient(var(--pink-color), var(--purple-color));

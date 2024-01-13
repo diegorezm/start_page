@@ -1,47 +1,47 @@
 <script lang="ts">
+  import { fly } from "svelte/transition";
   import WallpaperInput from "./sidebar.components/WallpaperInput.svelte";
   import ThemeDropdown from "./sidebar.components/ThemeDropdown.svelte";
   import ToggleEditMode from "./sidebar.components/ToggleEditMode.svelte";
   export let toggle: () => void;
 </script>
 
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <section class="sidebar" on:click|stopPropagation>
-    <div class="sidebar__close">
-      <button on:click={toggle}>
-        <i class="nf nf-cod-close" />
-      </button>
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<section class="sidebar" on:click|stopPropagation transition:fly={{x:'100%' , y:0, delay:0, duration: 250}}>
+  <div class="sidebar__close">
+    <button on:click={toggle}>
+      <i class="nf nf-cod-close" />
+    </button>
+  </div>
+
+  <div class="sidebar__component">
+    <div class="title__wrapper">
+      <h2 class="title">Wallpaper</h2>
     </div>
+    <WallpaperInput />
+  </div>
 
-    <div class="sidebar__component">
-      <div class="title__wrapper">
-        <h2 class="title">Wallpaper</h2>
-      </div>
-      <WallpaperInput />
+  <div class="sidebar__separator"></div>
+
+  <div class="sidebar__component">
+    <div class="title__wrapper">
+      <h2 class="title">Theme</h2>
     </div>
+    <ThemeDropdown />
+  </div>
 
-    <div class="sidebar__separator"></div>
+  <div class="sidebar__separator"></div>
 
-    <div class="sidebar__component">
-      <div class="title__wrapper">
-        <h2 class="title">Theme</h2>
-      </div>
-      <ThemeDropdown />
+  <div class="sidebar__component">
+    <div class="title__wrapper">
+      <h2 class="title">Edit mode</h2>
     </div>
-
-    <div class="sidebar__separator"></div>
-
-    <div class="sidebar__component">
-      <div class="title__wrapper">
-        <h2 class="title">Edit mode</h2>
-      </div>
-      <ToggleEditMode />
-    </div>
-  </section>
+    <ToggleEditMode />
+  </div>
+</section>
 
 <style>
-  
   .sidebar {
     display: flex;
     position: absolute;
@@ -51,7 +51,7 @@
     width: 30%;
     height: 100%;
     background-color: var(--crust);
-    transition: right 0.3s ease-in-out;
+    overflow:hidden;
   }
   .sidebar__component {
     position: relative;
@@ -84,7 +84,7 @@
   .title__wrapper {
     display: flex;
     justify-content: start;
-    font-size: 0.925em;
+    font-size: 1.75em;
     padding-bottom: 0.5em;
   }
 
