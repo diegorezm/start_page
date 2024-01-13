@@ -51,7 +51,6 @@
     width: 30%;
     height: 100%;
     background-color: var(--crust);
-    overflow:hidden;
   }
   .sidebar__component {
     position: relative;
