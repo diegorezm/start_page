@@ -34,6 +34,7 @@
     z-index: 10;
     background-color: rgba(0, 0, 0, 0);
     transition: background-color 0.3s ease;
+    overflow-x:hidden;
   }
 
   .modal__container.active {
