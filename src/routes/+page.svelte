@@ -50,12 +50,12 @@
     </button>
   </div>
   {#if showSidebar}
-    <Modal isRendered={showSidebar}>
+    <Modal isRendered={showSidebar}  toggle={showSidebarToggle}>
       <Sidebar toggle={showSidebarToggle} />
     </Modal>
   {/if}
   {#if renderEditModal}
-    <Modal isRendered={renderEditModal}>
+    <Modal isRendered={renderEditModal} toggle={renderEditModalToggle}>
       <EditBookmarkModal {renderEditModalToggle} />
     </Modal>
   {/if}

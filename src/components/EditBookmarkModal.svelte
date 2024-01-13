@@ -32,10 +32,7 @@
     renderEditModalToggle();
   };
 </script>
-
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="click" on:click={renderEditModalToggle}>
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
   <form
     on:submit|preventDefault={handleEditSubmit}
@@ -65,16 +62,8 @@
       <button type="button" on:click={renderEditModalToggle}> cancel </button>
     </div>
   </form>
-</div>
 
 <style>
-  .click {
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    display: grid;
-    place-items: center;
-  }
   .modal__form {
     display: flex;
     flex-direction: column;
@@ -130,14 +119,6 @@
   .modal__button__wrapper button[type="button"] {
     background-color: var(--red-color);
     font-weight: 700;
-  }
-
-  /* error style */
-  .error__wrapper {
-    width: 50%;
-  }
-  .error__wrapper span {
-    color: var(--red-color);
   }
 
   /* h1 style */

@@ -1,12 +1,25 @@
 <script lang="ts">
   export let isRendered: boolean;
+  export let toggle: () => void;
 </script>
 
-<div class={`modal__container ${isRendered ? "active" : ""}`}>
-  <slot />
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div
+  class={`modal__container ${isRendered ? "active" : ""}`}
+  on:click|stopPropagation
+>
+  <div class="click" on:click={toggle}>
+    <slot />
+  </div>
 </div>
 
 <style>
+  .click {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
   .modal__container {
     position: absolute;
     display: flex;

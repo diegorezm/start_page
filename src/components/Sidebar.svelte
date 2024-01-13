@@ -5,9 +5,8 @@
   export let toggle: () => void;
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="click" on:click={toggle}>
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <section class="sidebar" on:click|stopPropagation>
     <div class="sidebar__close">
       <button on:click={toggle}>
@@ -40,14 +39,9 @@
       <ToggleEditMode />
     </div>
   </section>
-</div>
 
 <style>
-  .click{
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-  }
+  
   .sidebar {
     display: flex;
     position: absolute;
