@@ -32,36 +32,37 @@
     renderEditModalToggle();
   };
 </script>
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-  <form
-    on:submit|preventDefault={handleEditSubmit}
-    class="modal__form"
-    on:click|stopPropagation
-  >
-    <h1 class="title">Edit</h1>
-    <input type="text" name="id" value={$editFormMetadata.id} hidden />
-    <input
-      type="text"
-      name="tag"
-      value={$editFormMetadata.tag.toString()}
-      hidden
-    />
-    <input type="text" name="title" value={$editFormMetadata.title} />
-    <input type="text" name="icon" value={$editFormMetadata.icon} />
-    <div class="icon__description">
-      <span
-        >choose an icon from
-        <a href="https://www.nerdfonts.com/cheat-sheet">nerdfonts</a>
-      </span>
-    </div>
 
-    <input type="text" name="link" value={$editFormMetadata.link} />
-    <div class="modal__button__wrapper">
-      <button type="submit"> Send </button>
-      <button type="button" on:click={renderEditModalToggle}> cancel </button>
-    </div>
-  </form>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+<form
+  on:submit|preventDefault={handleEditSubmit}
+  class="modal__form"
+  on:click|stopPropagation
+>
+  <h1 class="title">Edit</h1>
+  <input type="text" name="id" value={$editFormMetadata.id} hidden />
+  <input
+    type="text"
+    name="tag"
+    value={$editFormMetadata.tag.toString()}
+    hidden
+  />
+  <input type="text" name="title" value={$editFormMetadata.title} />
+  <input type="text" name="icon" value={$editFormMetadata.icon} />
+  <div class="icon__description">
+    <span
+      >choose an icon from
+      <a href="https://www.nerdfonts.com/cheat-sheet">nerdfonts</a>
+    </span>
+  </div>
+
+  <input type="text" name="link" value={$editFormMetadata.link} />
+  <div class="modal__button__wrapper">
+    <button type="submit"> Send </button>
+    <button type="button" on:click={renderEditModalToggle}> cancel </button>
+  </div>
+</form>
 
 <style>
   .modal__form {

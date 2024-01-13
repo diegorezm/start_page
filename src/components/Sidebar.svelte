@@ -84,7 +84,7 @@
   .title__wrapper {
     display: flex;
     justify-content: start;
-    font-size: 1.75em;
+    font-size: 0.925em;
     padding-bottom: 0.5em;
   }
 
