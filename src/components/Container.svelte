@@ -37,6 +37,7 @@
     color: var(--fg);
     background-position: center;
     background-size: cover;
+    overflow:hidden;
   }
 
   .hidden__container {
