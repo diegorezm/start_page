@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { onMount} from "svelte";
+  import { onMount } from "svelte";
+  import { fly } from "svelte/transition";
   import Container from "../components/Container.svelte";
   import Links from "../components/Links.svelte";
   import Icon from "../components/Icon.svelte";
@@ -50,7 +51,7 @@
     </button>
   </div>
   {#if showSidebar}
-    <Modal isRendered={showSidebar}  toggle={showSidebarToggle}>
+    <Modal isRendered={showSidebar} toggle={showSidebarToggle}>
       <Sidebar toggle={showSidebarToggle} />
     </Modal>
   {/if}
@@ -62,7 +63,10 @@
   <Clock />
   <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
-    <section class="links__container">
+    <section
+      class="links__container"
+      transition:fly={{ x: 0, y: 100, duration: 400 }}
+    >
       <Links
         links={$bookmarks.mydia}
         title={"mydia"}
