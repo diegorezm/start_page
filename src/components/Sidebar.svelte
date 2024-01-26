@@ -8,7 +8,11 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<section class="sidebar" on:click|stopPropagation transition:fly={{x:'100%' , y:0, delay:0, duration: 250}}>
+<section
+  class="sidebar"
+  on:click|stopPropagation
+  transition:fly={{ x: "100%", y: 0, delay: 0, duration: 250 }}
+>
   <div class="sidebar__close">
     <button on:click={toggle}>
       <i class="nf nf-cod-close" />
@@ -39,6 +43,7 @@
     </div>
     <ToggleEditMode />
   </div>
+
 </section>
 
 <style>
@@ -51,6 +56,21 @@
     width: 30%;
     height: 100%;
     background-color: var(--crust);
+    overflow-y: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--fg) var(--crust); /* Firefox */
+  }
+  .sidebar::-webkit-scrollbar {
+    width: 0.5em;
+  }
+
+  .sidebar::-webkit-scrollbar-thumb {
+    background-color: var(--fg);
+    border-radius: 5px;
+  }
+
+  .sidebar::-webkit-scrollbar-track {
+    background-color: var(--base);
   }
   .sidebar__component {
     position: relative;
@@ -92,6 +112,7 @@
     border-bottom: 0.1em solid var(--pink-color);
     border-radius: 0.2em;
   }
+
   @media (max-width: 1024px) {
     .sidebar {
       width: 70%;
