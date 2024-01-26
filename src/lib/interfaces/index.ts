@@ -1,13 +1,13 @@
 import type { Writable } from "svelte/store";
 
-export interface Wallpaper {
-  wallpaper: Writable<string>,
-  setWallpaper: (url: string) => void
-}
-
 export enum Tag {
   mydia = "mydia",
   com = "com"
+}
+
+export interface Wallpaper {
+  wallpaper: Writable<string>,
+  setWallpaper: (url: string) => void
 }
 
 export interface Links {
@@ -18,6 +18,12 @@ export interface Links {
   tag: Tag
 }
 
-export type Bookmarks = { 
+export type Bookmarks = {
   [tags in Tag]: Links[]
+}
+
+export interface Config {
+  fs: string,
+  radius: string,
+  radius_btn: string
 }
