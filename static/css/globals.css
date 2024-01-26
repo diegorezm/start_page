@@ -24,6 +24,8 @@
   :root {
     font-family: 'Roboto', sans-serif;
     --radius: 1em;
+    --radius-button: 0.2em;
+    --fs: 16px;
     --fg: #b3b1ad;
     --base: #0a0e14;
     --crust: #0D1017;
