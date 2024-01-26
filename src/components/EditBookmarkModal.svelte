@@ -3,6 +3,7 @@
   import { Tag, type Links } from "$lib/interfaces";
   import { bookmarks, editFormMetadata } from "$lib/store";
   import { createJsonData, updateBookmark } from "$lib/utils";
+  import Input from "./Input.svelte";
 
   export let renderEditModalToggle: () => void;
   const handleEditSubmit = (e: Event) => {
@@ -43,23 +44,22 @@
   transition:fly={{ x: 0, y: 50 }}
 >
   <h1 class="title">Edit</h1>
-  <input type="text" name="id" value={$editFormMetadata.id} hidden />
+  <input type="text" name="id" value={$editFormMetadata.id} hidden  />
   <input
     type="text"
     name="tag"
     value={$editFormMetadata.tag.toString()}
     hidden
   />
-  <input type="text" name="title" value={$editFormMetadata.title} />
-  <input type="text" name="icon" value={$editFormMetadata.icon} />
+  <Input name="title" value={$editFormMetadata.title} id="title" />
+  <Input name="icon" value={$editFormMetadata.icon} id="icon" />
   <div class="icon__description">
     <span
       >choose an icon from
       <a href="https://www.nerdfonts.com/cheat-sheet">nerdfonts</a>
     </span>
   </div>
-
-  <input type="text" name="link" value={$editFormMetadata.link} />
+  <Input name="link" value={$editFormMetadata.link} id="link" />
   <div class="modal__button__wrapper">
     <button type="submit"> Send </button>
     <button type="button" on:click={renderEditModalToggle}> cancel </button>
@@ -78,27 +78,13 @@
     background-image: var(--gradient-bg);
     background-size: cover;
     background-position: center;
-    gap: 1em;
+    gap: 0.5em;
     border-radius: var(--radius);
     transition:
       top 0.4s,
       opacity 0.4s;
   }
 
-  .modal__form input {
-    color: var(--fg-color);
-    padding-left: 0.8em;
-    height: 3rem;
-    width: 50%;
-    background-color: var(--base);
-    border: 2px solid var(--fg);
-    border-radius: var(--radius);
-  }
-
-  .modal__form input:focus {
-    outline: none;
-    border: 2px solid var(--pink-color);
-  }
   .modal__button__wrapper {
     display: flex;
     gap: 1em;
@@ -109,7 +95,7 @@
   .modal__button__wrapper button {
     width: 50%;
     height: 100%;
-    border-radius: 0.2em;
+    border-radius: var(--radius-button);
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
