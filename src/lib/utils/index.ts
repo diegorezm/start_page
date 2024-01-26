@@ -67,3 +67,12 @@ export const deleteBookmark = (link: Links) => {
   bookmarks[tag] = updatedSection;
   return bookmarks;
 };
+
+export const createBookMark = (link: Links) => {
+  const bookmarks = loadBookmark();
+  const tag = link.tag;
+  const section = bookmarks[tag];
+  const updatedSection = [...section, link];
+  bookmarks[tag] = updatedSection;
+  return bookmarks;
+};
