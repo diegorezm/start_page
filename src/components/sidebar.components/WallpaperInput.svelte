@@ -3,7 +3,7 @@
   import { isImageURL, isURL } from "$lib/helpers/urlHelper";
   import { userWallpaper } from "$lib/store";
   let errorMsg: string | null;
-  let wallpaper: string;
+  let wallpaper: string = "";
 
   const handleWallpaperSubmit = (e: Event) => {
     const form = e.target as HTMLFormElement;
@@ -41,6 +41,7 @@
     name="url"
     placeholder="wallpaper url..."
     bind:value={wallpaper}
+    id="wallpaper__input"
   />
   {#if errorMsg}
     <div class="error__wrapper">
@@ -62,21 +63,16 @@
     width: 100%;
     gap: 0.5em;
   }
-  input {
+#wallpaper__input {
     display: block;
     width: 100%;
     color: var(--fg-color);
     background-color: var(--base);
     border: 2px solid var(--fg);
-    border-radius: 0.2em;
+    border-radius: var(--radius-button);
     height: 2.225em;
     font-size: 1.225em;
     padding-left: 0.2em;
-  }
-
-  input:focus {
-    outline: none;
-    border: 2px solid var(--pink-color);
   }
   .form__button__wrapper {
     width: 100%;
@@ -91,7 +87,7 @@
   }
   .form__button__wrapper button {
     width: 40%;
-    border-radius: 0.2em;
+    border-radius: var(--radius-button);
     height: 2.225em;
     font-weight: 700;
     color: var(--crust);
