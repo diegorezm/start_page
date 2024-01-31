@@ -3,6 +3,8 @@
   import WallpaperInput from "./sidebar.components/WallpaperInput.svelte";
   import ThemeDropdown from "./sidebar.components/ThemeDropdown.svelte";
   import ToggleEditMode from "./sidebar.components/ToggleEditMode.svelte";
+  import AddBookmarkButton from "./sidebar.components/AddBookmarkButton.svelte";
+  export let renderAddModalToggle: () => void;
   export let toggle: () => void;
 </script>
 
@@ -39,11 +41,20 @@
 
   <div class="sidebar__component">
     <div class="title__wrapper">
-      <h2 class="title">Edit mode</h2>
+      <h2 class="title">Bookmarks</h2>
     </div>
-    <ToggleEditMode />
-  </div>
 
+    <div class="bookmarks__wrapper">
+      <div>
+        <h3 class="subtitle">Edit mode</h3>
+        <ToggleEditMode />
+      </div>
+      <div>
+        <h3 class="subtitle">Add bookmark</h3>
+        <AddBookmarkButton {renderAddModalToggle}/>
+      </div>
+    </div>
+  </div>
 </section>
 
 <style>
@@ -111,6 +122,19 @@
     text-align: start;
     border-bottom: 0.1em solid var(--pink-color);
     border-radius: 0.2em;
+  }
+
+  .subtitle {
+    text-align: start;
+    border-radius: 0.2em;
+    margin-top: 0.175em;
+    font-size: 1.1em;
+  }
+
+  .bookmarks__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
   }
 
   @media (max-width: 1024px) {
