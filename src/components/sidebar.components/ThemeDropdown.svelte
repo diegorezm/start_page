@@ -71,7 +71,7 @@
     appearance: none;
     width: 75%;
     height: 2.225em;
-    border-radius: var(--radius-button);
+    border-radius: 0.2em;
     padding-left: 0.2em;
     background-color: var(--crust);
     color: var(--fg);
