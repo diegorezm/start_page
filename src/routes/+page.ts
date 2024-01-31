@@ -1,23 +1,24 @@
 import type { Bookmarks, Links} from "$lib/interfaces";
 import { Tag } from "$lib/interfaces";
+import { uniqueID } from "$lib/utils";
 
 const mydia: Links[] = [
   {
-    id: 1,
+    id: uniqueID(),
     title: "AniWave",
     tag: Tag.mydia,
     icon: "nf-fa-tv",
     link: "https://aniwave.to/home"
   },
   {
-    id: 2,
+    id: uniqueID(),
     title: "Youtube",
     tag: Tag.mydia,
     icon: "nf-md-youtube",
     link: "https://www.youtube.com/"
   },
   {
-    id: 3,
+    id: uniqueID(),
     title: "Twitch",
     tag: Tag.mydia,
     icon: "nf-md-twitch",
@@ -27,21 +28,21 @@ const mydia: Links[] = [
 
 const com: Links[] = [
   {
-    id: 4,
+    id: uniqueID(),
     title: "Chatgpt",
     tag: Tag.com,
     icon: "nf-md-chat",
     link: "https://chat.openai.com/"
   },
   {
-    id: 5,
+    id: uniqueID(),
     title: "Whatsapp",
     tag: Tag.com,
     icon: "nf-fa-whatsapp",
     link: "https://web.whatsapp.com/"
   },
   {
-    id: 6,
+    id: uniqueID(),
     title: "Github",
     tag: Tag.com,
     icon: "nf-fa-github",

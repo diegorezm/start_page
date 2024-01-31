@@ -7,33 +7,35 @@
   import Clock from "../components/Clock.svelte";
   import Modal from "../components/Modal.svelte";
   import { loadBookmark } from "$lib/utils";
-  import { userWallpaper } from "$lib/store";
+  import { editFormMetadata, editMode, userWallpaper } from "$lib/store";
   import type { PageData } from "./$types";
   import { bookmarks } from "$lib/store";
   import Sidebar from "../components/Sidebar.svelte";
-  import EditBookmarkModal from "../components/EditBookmarkModal.svelte";
+  import BookmarksModal from "../components/BookmarksModal.svelte";
 
-  // links data
   export let data: PageData;
 
-  // load json
   $bookmarks = loadBookmark(data);
 
-  // conditional rendering
   let renderLinks = true;
   const renderLinksToggle = () => {
     renderLinks = !renderLinks;
   };
 
-  // edit modal
-  let renderEditModal = false;
-  const renderEditModalToggle = () => {
-    renderEditModal = !renderEditModal;
-  };
-
   let showSidebar = false;
   let showSidebarToggle = () => {
     showSidebar = !showSidebar;
+  };
+
+  let renderBookmarkModal = false;
+  let renderBookmarkModalToggle = () => {
+    renderBookmarkModal = !renderBookmarkModal;
+  };
+
+  let renderEditBookmarkModal = false;
+
+  let renderEditBookmarkModalToggle = () => {
+    renderEditBookmarkModal = !renderEditBookmarkModal;
   };
 
   onMount(() => {
@@ -52,14 +54,25 @@
   </div>
   {#if showSidebar}
     <Modal isRendered={showSidebar} toggle={showSidebarToggle}>
-      <Sidebar toggle={showSidebarToggle} />
+      <Sidebar
+        toggle={showSidebarToggle}
+        renderAddModalToggle={renderBookmarkModalToggle}
+      />
     </Modal>
   {/if}
-  {#if renderEditModal}
-    <Modal isRendered={renderEditModal} toggle={renderEditModalToggle}>
-      <EditBookmarkModal {renderEditModalToggle} />
+
+  {#if renderBookmarkModal}
+    <Modal isRendered={renderBookmarkModal} toggle={renderBookmarkModalToggle}>
+      <BookmarksModal {renderBookmarkModalToggle} />
     </Modal>
   {/if}
+
+  {#if renderEditBookmarkModal}
+    <Modal isRendered={renderEditBookmarkModal} toggle={renderEditBookmarkModalToggle}>
+      <BookmarksModal renderBookmarkModalToggle={renderEditBookmarkModalToggle} editMode={true} data={$editFormMetadata}/>
+    </Modal>
+  {/if}
+
   <Clock />
   <Icon onClick={renderLinksToggle} />
   {#if renderLinks}
@@ -71,13 +84,13 @@
         links={$bookmarks.mydia}
         title={"mydia"}
         icon={"nf-cod-file_media"}
-        {renderEditModalToggle}
+        renderBookmarkModalToggle={renderEditBookmarkModalToggle}
       />
       <Links
         links={$bookmarks.com}
         title={"com"}
         icon={"nf-fa-comments_o"}
-        {renderEditModalToggle}
+        renderBookmarkModalToggle={renderEditBookmarkModalToggle}
       />
     </section>
   {/if}
