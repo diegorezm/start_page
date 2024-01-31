@@ -11,7 +11,7 @@ export interface Wallpaper {
 }
 
 export interface Links {
-  id: number,
+  id?: number,
   title: string,
   link: string,
   icon: string,
