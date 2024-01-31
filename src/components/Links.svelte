@@ -2,19 +2,18 @@
   import { bookmarks, editMode } from "../lib/store";
   import type { Links } from "../lib/interfaces";
   import { editFormMetadata } from "../lib/store";
-  import { deleteBookmark } from "$lib/utils";
+  import { createJsonData, deleteBookmark } from "$lib/utils";
   export let links: Links[];
   export let title: string;
   export let icon: string;
-  export let renderEditModalToggle: () => void;
+  export let renderBookmarkModalToggle: () => void;
   function handleEditFormClick(bookmark: Links) {
     $editFormMetadata = bookmark;
-    renderEditModalToggle();
+    renderBookmarkModalToggle();
   }
   function handleDeleteButtonClick(bookmark: Links) {
     $bookmarks = deleteBookmark(bookmark);
-    // TODO: add a way for the user to add bookarms, until then i can´t really delete them.
-    // createJsonData($bookmarks);
+    createJsonData($bookmarks);
   }
 </script>
 
