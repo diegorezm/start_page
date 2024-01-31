@@ -3,6 +3,7 @@
   export let type = "text";
   export let name = "name";
   export let placeholder = "";
+  export let hidden = false;
   export let id: string;
   export let value: string;
   export let onChange: () => void = () => {};
@@ -18,6 +19,7 @@
     {id}
     {placeholder}
     {value}
+    {hidden}
     on:change={onChange}
   />
 </div>
@@ -36,7 +38,7 @@
     color: var(--fg-color);
     padding-left: 0.8em;
     height: 3.2rem;
-    width: 50%;
+    width: 75%;
     background-color: var(--base);
     border: 2px solid var(--fg);
     border-radius: var(--radius);
