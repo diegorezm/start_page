@@ -21,28 +21,20 @@
     const newLinkRaw = String(formData.get("link"));
     const newIcon = String(formData.get("icon"));
     const newTitle = String(formData.get("title"));
-    const newTagRaw = String(formData.get("tag"));
-    const newTag: () => Tag = () => {
-      if (newTagRaw in Tag) {
-        return Tag[newTagRaw as keyof typeof Tag];
-      } else {
-        return Tag.com;
-      }
-    };
-
+    const newTag = data.tag;
     const newLink: Links = editMode
       ? ({
           id: Number(formData.get("id")),
           title: newTitle,
           link: newLinkRaw,
           icon: newIcon,
-          tag: newTag(),
+          tag: newTag,
         } as Links)
       : ({
           title: newTitle,
           link: newLinkRaw,
           icon: newIcon,
-          tag: newTag(),
+          tag: newTag,
         } as Links);
     data = newLink;
     $bookmarks = editMode ? updateBookmark(data) : createBookMark(data);
@@ -76,15 +68,19 @@
       <a href="https://www.nerdfonts.com/cheat-sheet">nerdfonts</a>
     </span>
   </div>
-  <Input name="link" value={data.link} id="link" placeholder="Link..."/>
-  <Input
-    type="text"
-    name="tag"
-    value={data.tag.toString()}
-    hidden={editMode ? true : false}
-    placeholder="Tag..."
-    id="tag"
-  />
+  <Input name="link" value={data.link} id="link" placeholder="Link..." />
+
+  <div class="selection__wrapper" style={editMode ? 'display: none;' : ''}>
+    <select name="tag" id="tag" bind:value={data.tag} class="selection__box">
+      {#each Object.values(Tag) as tag}
+        <option value={tag}>{tag.toString()}</option>
+      {/each}
+    </select>
+    <div class="icon__container">
+      <i class="nf nf-custom-play_arrow"></i>
+    </div>
+  </div>
+
   <div class="modal__button__wrapper">
     <button type="submit"> Send </button>
     <button type="button" on:click={renderBookmarkModalToggle}> cancel </button>
@@ -140,6 +136,55 @@
     font-weight: 700;
   }
 
+  .selection__wrapper {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .selection__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid var(--fg);
+    appearance: none;
+    height: 3.2rem;
+    width: 75%;
+    padding-left: 0.2em;
+    background-color: var(--crust);
+    color: var(--fg);
+    font-size: 1.2em;
+    border-radius: 0.2em;
+  }
+
+  .selection__box:hover {
+    cursor: pointer;
+  }
+
+  .selection__box:focus {
+    outline: none;
+    border: 2px solid var(--pink-color);
+  }
+
+  .icon__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    height: 100%;
+    right: 25%;
+    width: 1em;
+    transition-duration: 300ms;
+  }
+
+  .selection__box:focus + .icon__container {
+    transform: rotate(90deg);
+  }
+
   /* h1 style */
   .title {
     color: var(--pink-color);
@@ -158,6 +203,12 @@
   @media (max-width: 1250px) {
     .modal__form {
       width: 75%;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .icon__container {
+      right: 35%;
     }
   }
 </style>
