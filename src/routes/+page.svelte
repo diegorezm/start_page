@@ -7,7 +7,7 @@
   import Clock from "../components/Clock.svelte";
   import Modal from "../components/Modal.svelte";
   import { loadBookmark } from "$lib/utils";
-  import { editFormMetadata, editMode, userWallpaper } from "$lib/store";
+  import { editFormMetadata, userWallpaper } from "$lib/store";
   import type { PageData } from "./$types";
   import { bookmarks } from "$lib/store";
   import Sidebar from "../components/Sidebar.svelte";
