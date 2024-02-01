@@ -9,7 +9,7 @@
   export let onChange: () => void = () => {};
 </script>
 
-<div class="input__wrapper">
+<div class="input__wrapper" style={hidden ? 'display: none;' : ''}>
   {#if hasLabel}
     <label for={id}>{name}:</label>
   {/if}
