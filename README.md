@@ -6,4 +6,4 @@ Simple start page i wrote for my browser.
 - [] Add a sidebar with all the customization options
 - [] Add a way for the user to customize/add colorschemes
 ---
-![Project showcase](./static/print.png "print")
+![Project showcase](./static/showcase.png "showcase")
