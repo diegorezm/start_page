@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import { isImageURL, isURL } from "$lib/helpers/urlHelper";
-  import { userWallpaper } from "$lib/store";
+  import { isImageURL, isURL } from "$lib/helpers/url-helper";
+  import userWallpaper from "$lib/context/wallpaper-context";
   let errorMsg: string | null;
   let wallpaper: string = "";
 
@@ -63,7 +63,7 @@
     width: 100%;
     gap: 0.5em;
   }
-#wallpaper__input {
+  #wallpaper__input {
     display: block;
     width: 100%;
     color: var(--fg-color);

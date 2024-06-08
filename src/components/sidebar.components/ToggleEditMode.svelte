@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { editMode } from "$lib/store";
+  import { editMode } from "$lib/context/edit-context";
 </script>
 
 <div class="slider__wrapper">

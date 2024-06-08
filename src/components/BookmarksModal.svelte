@@ -1,52 +1,49 @@
 <script lang="ts">
   import { fly } from "svelte/transition";
-  import { Tag, type Links } from "$lib/interfaces";
-  import { bookmarks, editFormMetadata } from "$lib/store";
-  import { createJsonData, updateBookmark, createBookMark } from "$lib/utils";
   import Input from "./Input.svelte";
+  import {
+    defaultFormMetaData,
+    type EditFormMetadata,
+  } from "$lib/context/edit-context";
+  import type Link from "$lib/interfaces/link";
+  import useLinks from "$lib/hooks/use-links";
+  import useSections from "$lib/hooks/use-sections";
+  import uniqueID from "$lib/utils/unique-id";
 
   export let renderBookmarkModalToggle: () => void;
   export let editMode = false;
-  export let data: Links = {
-    id: 0,
-    title: "",
-    link: "",
-    icon: "",
-    tag: Tag.com,
-  };
+  export let data: EditFormMetadata = defaultFormMetaData;
+
+  const { getSectionKeys } = useSections();
+  let sec = getSectionKeys()[0];
 
   const handleSubmit = (e: Event) => {
+    const { updateLink, createLink } = useLinks();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     const newLinkRaw = String(formData.get("link"));
     const newIcon = String(formData.get("icon"));
     const newTitle = String(formData.get("title"));
-    const newTag = data.tag;
-    const newLink: Links = editMode
+    const newLink: Link = editMode
       ? ({
           id: Number(formData.get("id")),
           title: newTitle,
           link: newLinkRaw,
           icon: newIcon,
-          tag: newTag,
-        } as Links)
+        } as Link)
       : ({
+          id: uniqueID(),
           title: newTitle,
           link: newLinkRaw,
           icon: newIcon,
-          tag: newTag,
-        } as Links);
-    data = newLink;
-    $bookmarks = editMode ? updateBookmark(data) : createBookMark(data);
-    createJsonData($bookmarks);
+        } as Link);
+    if (editMode) {
+      if (newLink.id !== undefined)
+        updateLink(data.section, newLink.id, newLink);
+    } else {
+      createLink(sec, newLink);
+    }
     renderBookmarkModalToggle();
-    $editFormMetadata = {
-      id: 0,
-      title: "",
-      link: "",
-      icon: "",
-      tag: Tag.com,
-    };
   };
 </script>
 
@@ -59,21 +56,26 @@
   transition:fly={{ x: 0, y: 50 }}
 >
   <h1 class="title">{editMode ? "Edit bookmark" : "New bookmark"}</h1>
-  <input type="text" name="id" value={data.id} hidden />
-  <Input name="title" value={data.title} placeholder="Title..." id="title" />
-  <Input name="icon" value={data.icon} placeholder="Icon..." id="icon" />
+  <input type="text" name="id" value={data.link.id} hidden />
+  <Input
+    name="title"
+    value={data.link.title}
+    placeholder="Title..."
+    id="title"
+  />
+  <Input name="icon" value={data.link.icon} placeholder="Icon..." id="icon" />
   <div class="icon__description">
     <span
       >choose an icon from
       <a href="https://www.nerdfonts.com/cheat-sheet">nerdfonts</a>
     </span>
   </div>
-  <Input name="link" value={data.link} id="link" placeholder="Link..." />
+  <Input name="link" value={data.link.link} id="link" placeholder="Link..." />
 
-  <div class="selection__wrapper" style={editMode ? 'display: none;' : ''}>
-    <select name="tag" id="tag" bind:value={data.tag} class="selection__box">
-      {#each Object.values(Tag) as tag}
-        <option value={tag}>{tag.toString()}</option>
+  <div class="selection__wrapper" style={editMode ? "display: none;" : ""}>
+    <select name="tag" id="tag" bind:value={sec} class="selection__box">
+      {#each getSectionKeys() as key}
+        <option value={key}>{key}</option>
       {/each}
     </select>
     <div class="icon__container">
@@ -136,6 +138,22 @@
     font-weight: 700;
   }
 
+  /* h1 style */
+  .title {
+    color: var(--pink-color);
+    font-size: 2.5em;
+    font-weight: 700;
+    text-align: center;
+    padding: 0.1em;
+  }
+  .icon__description {
+    width: 50%;
+    font-size: 0.925em;
+  }
+  .icon__description a {
+    color: var(--purple-color);
+  }
+
   .selection__wrapper {
     display: flex;
     position: relative;
@@ -185,27 +203,11 @@
     transform: rotate(90deg);
   }
 
-  /* h1 style */
-  .title {
-    color: var(--pink-color);
-    font-size: 2.5em;
-    font-weight: 700;
-    text-align: center;
-    padding: 0.1em;
-  }
-  .icon__description {
-    width: 50%;
-    font-size: 0.925em;
-  }
-  .icon__description a {
-    color: var(--purple-color);
-  }
   @media (max-width: 1250px) {
     .modal__form {
       width: 75%;
     }
   }
-
   @media (min-width: 1440px) {
     .icon__container {
       right: 35%;

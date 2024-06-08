@@ -1,22 +1,27 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { fly } from "svelte/transition";
   import Container from "../components/Container.svelte";
-  import Links from "../components/Links.svelte";
+  import Sections from "../components/Sections.svelte";
   import Icon from "../components/Icon.svelte";
   import Clock from "../components/Clock.svelte";
   import Modal from "../components/Modal.svelte";
-  import { loadBookmark } from "$lib/utils";
-  import { editFormMetadata, userWallpaper } from "$lib/store";
   import type { PageData } from "./$types";
-  import { bookmarks } from "$lib/store";
   import Sidebar from "../components/Sidebar.svelte";
   import BookmarksModal from "../components/BookmarksModal.svelte";
+  import useSections from "$lib/hooks/use-sections";
+  import handleStorage from "$lib/utils/handle-storage";
+  import sections from "$lib/context/section-context";
+  import userWallpaper from "$lib/context/wallpaper-context";
+  import { editFormMetadata } from "$lib/context/edit-context";
 
   export let data: PageData;
 
-  $bookmarks = loadBookmark(data);
+  const { loadSections, getSectionKeys } = useSections();
+  const { saveToStorage } = handleStorage();
 
+  $sections = loadSections(data.sections);
+  
   let renderLinks = true;
   const renderLinksToggle = () => {
     renderLinks = !renderLinks;
@@ -44,6 +49,10 @@
       $userWallpaper = savedWallpaper;
     }
   });
+
+  onDestroy(() => {
+    saveToStorage();
+  });
 </script>
 
 <Container>
@@ -68,8 +77,15 @@
   {/if}
 
   {#if renderEditBookmarkModal}
-    <Modal isRendered={renderEditBookmarkModal} toggle={renderEditBookmarkModalToggle}>
-      <BookmarksModal renderBookmarkModalToggle={renderEditBookmarkModalToggle} editMode={true} data={$editFormMetadata}/>
+    <Modal
+      isRendered={renderEditBookmarkModal}
+      toggle={renderEditBookmarkModalToggle}
+    >
+      <BookmarksModal
+        renderBookmarkModalToggle={renderEditBookmarkModalToggle}
+        editMode={true}
+        data={$editFormMetadata}
+      />
     </Modal>
   {/if}
 
@@ -80,18 +96,14 @@
       class="links__container"
       transition:fly={{ x: 0, y: 100, duration: 400 }}
     >
-      <Links
-        links={$bookmarks.mydia}
-        title={"mydia"}
-        icon={"nf-cod-file_media"}
-        renderBookmarkModalToggle={renderEditBookmarkModalToggle}
-      />
-      <Links
-        links={$bookmarks.com}
-        title={"com"}
-        icon={"nf-fa-comments_o"}
-        renderBookmarkModalToggle={renderEditBookmarkModalToggle}
-      />
+      {#each getSectionKeys() as key}
+        <Sections
+          links={$sections[key].links}
+          title={$sections[key].title}
+          icon={$sections[key].icon}
+          renderBookmarkModalToggle={renderEditBookmarkModalToggle}
+        />
+      {/each}
     </section>
   {/if}
 </Container>
