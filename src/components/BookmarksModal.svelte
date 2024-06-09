@@ -96,8 +96,8 @@
   .modal__form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: 40%;
     height: 70%;
     z-index: 20;
@@ -113,14 +113,14 @@
 
   .modal__button__wrapper {
     display: flex;
+    width:75%;
     gap: 1em;
     margin-top: 1em;
-    width: 50%;
-    height: 10%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
   }
   .modal__button__wrapper button {
-    width: 50%;
-    height: 100%;
+    padding: 0.8em 2em;
     border-radius: var(--radius-button);
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -208,10 +208,17 @@
 
   @media (max-width: 1250px) {
     .modal__form {
-      width: 75%;
+      width: 85%;
+      height: fit-content;
+      padding: 2em 0em;
     }
   }
   @media (min-width: 1440px) {
+    .modal__form {
+      width: fit-content;
+      height: fit-content;
+      padding: 2em 1em;
+    }
     .icon__container {
       right: 35%;
     }
