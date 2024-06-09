@@ -215,7 +215,7 @@
   }
   @media (min-width: 1440px) {
     .modal__form {
-      width: fit-content;
+      width: 40%;
       height: fit-content;
       padding: 2em 1em;
     }
