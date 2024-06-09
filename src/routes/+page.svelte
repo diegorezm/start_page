@@ -2,20 +2,24 @@
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
   import Container from "../components/Container.svelte";
-  import Links from "../components/Links.svelte";
+  import Sections from "../components/Sections.svelte";
   import Icon from "../components/Icon.svelte";
   import Clock from "../components/Clock.svelte";
   import Modal from "../components/Modal.svelte";
-  import { loadBookmark } from "$lib/utils";
-  import { editFormMetadata, userWallpaper } from "$lib/store";
   import type { PageData } from "./$types";
-  import { bookmarks } from "$lib/store";
   import Sidebar from "../components/Sidebar.svelte";
   import BookmarksModal from "../components/BookmarksModal.svelte";
+  import useSections from "$lib/hooks/use-sections";
+  import sections from "$lib/context/section-context";
+  import { editFormMetadata } from "$lib/context/edit-context";
+  import useWallpaper from "$lib/hooks/use-wallpaper";
 
   export let data: PageData;
 
-  $bookmarks = loadBookmark(data);
+  const { loadSections, getSectionKeys } = useSections();
+  const { loadWallpaper } = useWallpaper();
+
+  $sections = loadSections(data.sections);
 
   let renderLinks = true;
   const renderLinksToggle = () => {
@@ -39,10 +43,7 @@
   };
 
   onMount(() => {
-    const savedWallpaper = localStorage.getItem("wallpaper");
-    if (savedWallpaper) {
-      $userWallpaper = savedWallpaper;
-    }
+    loadWallpaper();
   });
 </script>
 
@@ -68,8 +69,15 @@
   {/if}
 
   {#if renderEditBookmarkModal}
-    <Modal isRendered={renderEditBookmarkModal} toggle={renderEditBookmarkModalToggle}>
-      <BookmarksModal renderBookmarkModalToggle={renderEditBookmarkModalToggle} editMode={true} data={$editFormMetadata}/>
+    <Modal
+      isRendered={renderEditBookmarkModal}
+      toggle={renderEditBookmarkModalToggle}
+    >
+      <BookmarksModal
+        renderBookmarkModalToggle={renderEditBookmarkModalToggle}
+        editMode={true}
+        data={$editFormMetadata}
+      />
     </Modal>
   {/if}
 
@@ -80,18 +88,14 @@
       class="links__container"
       transition:fly={{ x: 0, y: 100, duration: 400 }}
     >
-      <Links
-        links={$bookmarks.mydia}
-        title={"mydia"}
-        icon={"nf-cod-file_media"}
-        renderBookmarkModalToggle={renderEditBookmarkModalToggle}
-      />
-      <Links
-        links={$bookmarks.com}
-        title={"com"}
-        icon={"nf-fa-comments_o"}
-        renderBookmarkModalToggle={renderEditBookmarkModalToggle}
-      />
+      {#each getSectionKeys() as key}
+        <Sections
+          links={$sections[key].links}
+          title={$sections[key].title}
+          icon={$sections[key].icon}
+          renderBookmarkModalToggle={renderEditBookmarkModalToggle}
+        />
+      {/each}
     </section>
   {/if}
 </Container>
@@ -103,10 +107,10 @@
     position: relative;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 60%;
-    height: 50%;
+    gap: 1.225rem;
+    width: fit-content;
+    height: fit-content;
+    padding: 2.25em 5em;
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
@@ -137,18 +141,6 @@
   .showsidebar:hover {
     transform: rotate(90deg);
     cursor: pointer;
-  }
-
-  @media (min-width: 1440px) {
-    .links__container {
-      width: 60%;
-      height: 40%;
-    }
-  }
-  @media (max-width: 1250px) {
-    .links__container {
-      width: 80%;
-    }
   }
 
   @media (max-width: 768px) {

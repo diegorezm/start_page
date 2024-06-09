@@ -1,19 +1,21 @@
 <script lang="ts">
-  import { bookmarks, editMode } from "../lib/store";
-  import type { Links } from "../lib/interfaces";
-  import { editFormMetadata } from "../lib/store";
-  import { createJsonData, deleteBookmark } from "$lib/utils";
-  export let links: Links[];
+  import { editMode, editFormMetadata } from "../lib/context/edit-context";
+  import type Link from "$lib/interfaces/link";
+  import useLinks from "$lib/hooks/use-links";
+  export let links: Link[];
   export let title: string;
   export let icon: string;
   export let renderBookmarkModalToggle: () => void;
-  function handleEditFormClick(bookmark: Links) {
-    $editFormMetadata = bookmark;
+  function handleEditFormClick(bookmark: Link) {
+    $editFormMetadata = {section: title, link: bookmark};
     renderBookmarkModalToggle();
   }
-  function handleDeleteButtonClick(bookmark: Links) {
-    $bookmarks = deleteBookmark(bookmark);
-    createJsonData($bookmarks);
+
+  function handleDeleteButtonClick(linkId: number | undefined) {
+    console.log(linkId);
+    if(linkId === undefined) return;
+    const { deleteLink } = useLinks();
+    deleteLink(title, linkId);
   }
 </script>
 
@@ -35,7 +37,7 @@
           <div class="edit__mode__div">
             <button
               class="edit__mode__btn"
-              on:click={() => handleDeleteButtonClick(link)}
+              on:click={() => handleDeleteButtonClick(link.id)}
             >
               <i class="nf nf-cod-trash"></i>
             </button>
@@ -57,12 +59,15 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 2em;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2em;
+    width: 100%;
   }
   .list__wrapper {
     display: flex;
     flex-direction: row;
-    gap: 2em;
+    gap: 1.4em;
     font-size: 2rem;
   }
   .title {
@@ -70,7 +75,6 @@
     font-size: 2.5em;
     font-weight: 700;
     text-align: center;
-    padding: 0.1em;
   }
   li:hover,
   .edit__mode__btn:hover,
@@ -83,7 +87,7 @@
     width: 100%;
     font-size: 0.625em;
     padding: 0.1em;
-    gap:0.5em;
+    gap: 0.5em;
   }
   .edit__mode__btn {
     display: block;

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { userWallpaper } from "$lib/store";
+  import userWallpaper from "$lib/context/wallpaper-context";
   import { onDestroy } from "svelte";
 
   let container: HTMLDivElement;
@@ -9,7 +9,7 @@
       ? `url(${wallpaper})`
       : "var(--gradient-bg)";
   };
-  
+
   const unsub = userWallpaper.subscribe((wallpaper) => {
     if (container) {
       updateBackground(wallpaper);
@@ -37,7 +37,7 @@
     color: var(--fg);
     background-position: center;
     background-size: cover;
-    overflow:hidden;
+    overflow: hidden;
   }
 
   .hidden__container {
