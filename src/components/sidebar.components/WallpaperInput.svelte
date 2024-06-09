@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
   import { isImageURL, isURL } from "$lib/helpers/url-helper";
-  import userWallpaper from "$lib/context/wallpaper-context";
+  import useWallpaper from "$lib/hooks/use-wallpaper";
   let errorMsg: string | null;
   let wallpaper: string = "";
-
+  const { setWallpaper, removeWallpaper } = useWallpaper();
   const handleWallpaperSubmit = (e: Event) => {
     const form = e.target as HTMLFormElement;
     if (!isURL(wallpaper)) {
@@ -16,18 +16,16 @@
       return;
     }
     if (wallpaper) {
-      $userWallpaper = wallpaper;
-      localStorage.setItem("wallpaper", wallpaper);
+      setWallpaper(wallpaper);
       errorMsg = "";
       form.reset();
     }
   };
 
   const handleWallpaperDelete = () => {
-    localStorage.removeItem("wallpaper");
     errorMsg = "";
     wallpaper = "";
-    $userWallpaper = null;
+    removeWallpaper();
   };
 
   onDestroy(() => {

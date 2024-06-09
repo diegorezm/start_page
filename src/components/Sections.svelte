@@ -59,12 +59,15 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    gap: 2em;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2em;
+    width: 100%;
   }
   .list__wrapper {
     display: flex;
     flex-direction: row;
-    gap: 2em;
+    gap: 1.4em;
     font-size: 2rem;
   }
   .title {
@@ -72,7 +75,6 @@
     font-size: 2.5em;
     font-weight: 700;
     text-align: center;
-    padding: 0.1em;
   }
   li:hover,
   .edit__mode__btn:hover,

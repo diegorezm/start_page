@@ -9,6 +9,7 @@
   import useLinks from "$lib/hooks/use-links";
   import useSections from "$lib/hooks/use-sections";
   import uniqueID from "$lib/utils/unique-id";
+    import handleStorage from "$lib/utils/handle-storage";
 
   export let renderBookmarkModalToggle: () => void;
   export let editMode = false;
@@ -19,6 +20,7 @@
 
   const handleSubmit = (e: Event) => {
     const { updateLink, createLink } = useLinks();
+    const {saveToStorage} = handleStorage();
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     const newLinkRaw = String(formData.get("link"));
@@ -43,6 +45,7 @@
     } else {
       createLink(sec, newLink);
     }
+    saveToStorage();
     renderBookmarkModalToggle();
   };
 </script>
