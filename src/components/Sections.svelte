@@ -12,7 +12,6 @@
   }
 
   function handleDeleteButtonClick(linkId: number | undefined) {
-    console.log(linkId);
     if(linkId === undefined) return;
     const { deleteLink } = useLinks();
     deleteLink(title, linkId);
