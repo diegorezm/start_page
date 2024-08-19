@@ -12,7 +12,6 @@ export default defineConfig({
     },
   },
   plugins: [vue()],
-  base: "/start_page/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
