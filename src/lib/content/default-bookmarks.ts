@@ -4,9 +4,9 @@ import Bookmark from "../interfaces/bookmark";
 const mydia: Bookmark[] = [
   {
     id: uniqueID(),
-    label: "AniWave",
+    label: "HiAnime",
     icon: "ion:tv-outline",
-    url: "https://aniwave.to/home",
+    url: "https://hianime.to/",
   },
   {
     id: uniqueID(),
