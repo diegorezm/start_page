@@ -1,10 +1,9 @@
 import "./style.css";
 import App from "./App.vue";
+import { ViteSSG } from "vite-ssg/single-page";
 import { createPinia } from "pinia";
-import { createApp } from "vue";
 
-// createApp(App).mount("#app");
-const pinia = createPinia();
-const app = createApp(App);
-app.use(pinia);
-app.mount("#app");
+export const createApp = ViteSSG(App, ({ app }) => {
+  const pinia = createPinia();
+  app.use(pinia);
+});
