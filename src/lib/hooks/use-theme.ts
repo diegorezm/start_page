@@ -10,7 +10,7 @@ const useTheme = () => {
     if (THEMES.includes(theme as Theme)) {
       return theme as Theme;
     }
-    return "default"; // Default theme
+    return "default";
   };
 
   const loadTheme = () => {

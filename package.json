@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite-ssg build",
-    "preview": "vite preview"
+    "build": "vue-tsc -b && vite-ssg build && bun run posbuild",
+    "posbuild": "cp manifest.json dist",
+    "preview": "vite preview",
+    "start:firefox": "web-ext run --source-dir ./dist/",
+    "build:ext": "bun run build && bunx web-ext build --source-dir=dist"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.13.2",
@@ -38,7 +41,8 @@
     "typescript-eslint": "^8.3.0",
     "vite": "^5.3.4",
     "vite-ssg": "^0.23.8",
-    "vue-tsc": "^2.0.24"
+    "vue-tsc": "^2.0.24",
+    "web-ext": "^8.2.0"
   },
   "module": "index.ts"
 }

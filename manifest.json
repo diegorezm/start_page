@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "Start page",
+  "homepage_url": "https://github.com/diegorezm/wallpapercl",
+  "version": "1.0",
+  "description": "A starter page built for you browser!",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "icons": {
+    "16": "favicon-16.png"
+    "48": "favicon-48.png"
+    "128": "favicon-128.png"
+  },
+  "permissions": ["storage", "tabs"]
+}
