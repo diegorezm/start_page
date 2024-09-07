@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 import Section from "@/lib/interfaces/section";
-import BookmarkComponent from "./bookmark-component.vue";
+import BookmarkComponent from "@/components/bookmarks/bookmark-component.vue";
+import Button from "@/components/ui/button/Button.vue";
+import { editMode } from "@/lib/context/edit-context";
+import { useOpenEditSectionSheet } from "@/lib/hooks/use-open-edit-section";
 
 const { section } = defineProps<{ section: Section }>();
+const { onOpen } = useOpenEditSectionSheet();
+const onOpenClick = () => {
+  onOpen(section);
+};
 </script>
 
 <template>
@@ -13,6 +20,11 @@ const { section } = defineProps<{ section: Section }>();
     >
       <Icon :icon="section.icon" />
       <h1>{{ section.label }}</h1>
+      <div class="ml-2" v-if="editMode">
+        <Button size="sm" variant="secondary" @click="onOpenClick">
+          <Icon icon="ion:pencil-outline" class="size-5" />
+        </Button>
+      </div>
     </nav>
     <div
       class="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1"
@@ -21,7 +33,7 @@ const { section } = defineProps<{ section: Section }>();
         v-for="bookmark in section.bookmarks"
         :key="bookmark.id"
         :bookmark="bookmark"
-        :section="section.label"
+        :section="section.id"
       />
     </div>
   </div>

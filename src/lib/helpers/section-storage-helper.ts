@@ -19,8 +19,9 @@ const sectionStorageHelper = () => {
         sections.value = secs;
         return secs;
       }
-      throw new Error();
-    } catch (error) {
+      throw new Error("Not able to parse local data.");
+    } catch (error: unknown) {
+      console.error("Error loading sections from storage:", error);
       return null;
     }
   };

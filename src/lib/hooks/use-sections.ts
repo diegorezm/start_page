@@ -12,50 +12,77 @@ const useSections = () => {
     } else {
       const sec: SectionRecord = {};
       defaultSections.map((e) => {
-        sec[e.label] = e;
+        sec[e.id] = e;
       });
       sections.value = sec;
+      saveToStorage();
     }
   };
 
-  const createSections = (section: Section[]) => {
-    section.map((e) => {
-      createSection(e);
-    });
-    saveToStorage();
-    return sections.value;
-  };
-
-  const createSection = (section: Section) => {
+  const getSectionById = (id: string) => {
     const sectionValues = sections.value;
-    if (!(section.label in sectionValues)) {
-      sectionValues[section.label] = section;
-      sections.value = sectionValues;
+    if (id in sectionValues) {
+      return sectionValues[id];
     }
-    saveToStorage();
-    return sectionValues;
-  };
-
-  const deleteSection = (section: string) => {
-    const sectionValues = sections.value;
-    if (section in sectionValues) {
-      delete sectionValues[section];
-      sections.value = sectionValues;
-    }
-    saveToStorage();
-    return sectionValues;
+    return null;
   };
 
   const getSectionKeys = () => {
     return Object.keys(sections.value) as string[];
   };
 
+  const getAllSections = () => {
+    const keys = getSectionKeys();
+    console.log(keys)
+    const allSections = keys
+      .map((id) => getSectionById(id))
+      .filter((section) => section !== null);
+    return allSections;
+  };
+
+  const createSections = (section: Section[]) => {
+    section.forEach((e) => {
+      createSection(e);
+    });
+    saveToStorage();
+  };
+
+  const createSection = (section: Section) => {
+    const sectionValues = sections.value;
+    if (!(section.label in sectionValues)) {
+      sectionValues[section.id] = section;
+      sections.value = sectionValues;
+    }
+    saveToStorage();
+  };
+
+  const updateSection = (section: Section) => {
+    const sectionValues = { ...sections.value };
+    const toUpdate = sectionValues[section.id];
+    toUpdate.label = section.label;
+    toUpdate.icon = section.icon;
+    sections.value = sectionValues;
+    saveToStorage();
+  };
+
+  const deleteSection = (section: string) => {
+    const sectionValues = { ...sections.value };
+    if (section in sectionValues) {
+      delete sectionValues[section];
+      sections.value = sectionValues;
+    }
+    saveToStorage();
+  };
+
   return {
     loadSections,
+    getSectionById,
+    getSectionKeys,
+    getAllSections,
     createSection,
+    updateSection,
     createSections,
     deleteSection,
-    getSectionKeys,
   };
 };
 export default useSections;

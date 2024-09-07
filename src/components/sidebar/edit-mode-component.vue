@@ -11,6 +11,6 @@ watch(shouldEditMode, (value) => {
 <template>
   <div class="flex items-center space-x-2">
     <Switch id="edit-mode" v-model:checked="shouldEditMode" />
-    <Label for="edit-mode">Edit mode</Label>
+    <Label for="edit-mode">Enable edit mode</Label>
   </div>
 </template>

@@ -7,12 +7,12 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import BookmarkFormComponent from "./bookmark-form-component.vue";
+import useBookmarks from "@/lib/hooks/use-bookmarks";
+import { ref, watch } from "vue";
 import {
   defaultFormMetaData,
   useOpenEditBookmarkSheet,
-} from "@/lib/context/edit-context";
-import useBookmarks from "@/lib/hooks/use-bookmarks";
-import { ref, watch } from "vue";
+} from "@/lib/hooks/use-open-edit-bookmarks";
 
 const openEditBookmarkSheet = useOpenEditBookmarkSheet();
 

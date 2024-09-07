@@ -18,7 +18,6 @@ const icon = ref("");
 onMounted(() => {
   const iconIndex = random(0, 2);
   icon.value = getRandomIcon(iconIndex);
-  console.log(icon.value);
 });
 </script>
 

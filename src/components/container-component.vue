@@ -7,7 +7,6 @@ const wallpaperExists = ref(false);
 
 const updateBackground = (wallpaper: string | null) => {
   wallpaperExists.value = !!wallpaper;
-  console.log(wallpaperExists.value);
   if (container.value) {
     container.value.style.backgroundImage = wallpaper
       ? `url(${wallpaper})`
@@ -26,7 +25,7 @@ watch(
 
 <template>
   <div
-    class="img_container bg-background relative flex flex-col items-center justify-center w-full h-screen overflow-hidden"
+    class="img_container bg-background relative flex flex-col items-center justify-center w-full h-screen overflow-y-auto"
     ref="container"
   >
     <div

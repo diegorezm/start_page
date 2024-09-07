@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 import Bookmark from "@/lib/interfaces/bookmark";
-import Button from "./ui/button/Button.vue";
-import { editMode, useOpenEditBookmarkSheet } from "@/lib/context/edit-context";
+import Button from "@/components/ui/button/Button.vue";
+import { editMode } from "@/lib/context/edit-context";
 import useBookmarks from "@/lib/hooks/use-bookmarks";
+import { useOpenEditBookmarkSheet } from "@/lib/hooks/use-open-edit-bookmarks";
 
 const { deleteBookmark } = useBookmarks();
 
@@ -39,10 +40,10 @@ const handleClickDelete = () => {
     </Button>
     <div class="flex items-center justify-center gap-2 w-full" v-if="editMode">
       <Button size="sm" variant="outline" @click="handleClickDelete">
-        <Icon icon="ion:trash-outline" class="size-6" />
+        <Icon icon="ion:trash-outline" class="size-5" />
       </Button>
       <Button size="sm" variant="secondary" @click="handleEditClick">
-        <Icon icon="ion:pencil-outline" class="size-6" />
+        <Icon icon="ion:pencil-outline" class="size-5" />
       </Button>
     </div>
   </div>

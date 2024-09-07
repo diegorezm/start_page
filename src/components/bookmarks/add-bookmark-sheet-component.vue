@@ -15,10 +15,7 @@ const { createBookmark } = useBookmarks();
 </script>
 
 <template>
-  <Sheet
-    :open="openAddBookmarkSheet.isOpen"
-    @update:open="openAddBookmarkSheet.onClose"
-  >
+  <Sheet :open="openAddBookmarkSheet.isOpen" @update:open="openAddBookmarkSheet.onClose">
     <SheetContent>
       <SheetHeader>
         <SheetTitle>New bookmark</SheetTitle>
@@ -26,18 +23,15 @@ const { createBookmark } = useBookmarks();
           You are about to create a bookmark.
         </SheetDescription>
       </SheetHeader>
-      <BookmarkFormComponent
-        :onSubmit="
-          (values) => {
-            const bookmark: Bookmark = {
-              ...values,
-              id: uniqueID(),
-            };
-            createBookmark(values.section, bookmark);
-            openAddBookmarkSheet.onClose();
-          }
-        "
-      />
+      <BookmarkFormComponent :on-submit="(values) => {
+        const bookmark: Bookmark = {
+          ...values,
+          id: uniqueID(),
+        };
+        createBookmark(values.section, bookmark);
+        openAddBookmarkSheet.onClose();
+      }
+        " />
     </SheetContent>
   </Sheet>
 </template>
