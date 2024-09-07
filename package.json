@@ -9,7 +9,7 @@
     "posbuild": "cp manifest.json dist",
     "preview": "vite preview",
     "start:firefox": "web-ext run --source-dir ./dist/",
-    "build:ext": "bun run build && bunx web-ext build --source-dir=dist"
+    "build:ext": "rm -rf web-ext-artifacts && bun run build && bunx web-ext build --source-dir=dist"
   },
   "dependencies": {
     "@vee-validate/zod": "^4.13.2",
