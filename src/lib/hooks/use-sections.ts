@@ -33,7 +33,6 @@ const useSections = () => {
 
   const getAllSections = () => {
     const keys = getSectionKeys();
-    console.log(keys)
     const allSections = keys
       .map((id) => getSectionById(id))
       .filter((section) => section !== null);

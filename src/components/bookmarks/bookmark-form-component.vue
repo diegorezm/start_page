@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/first-attribute-linebreak -->
 <script setup lang="ts">
 import {
   FormControl,
@@ -58,8 +59,9 @@ const { getAllSections, getSectionKeys } = useSections();
 const sectionList = getAllSections();
 const sectionKeys = getSectionKeys();
 const iconNames = listIcons();
-const open = ref(false);
 const selectedIcon = ref(props.initialValues?.icon ?? "");
+const searchIcon = ref("");
+const open = ref(false);
 
 const formSchema = toTypedSchema(
   z.object({
@@ -72,6 +74,26 @@ const formSchema = toTypedSchema(
     }),
   }),
 );
+
+const filteredIcons = computed(() =>
+  searchIcon.value === '' ?
+    iconNames :
+    iconNames.filter((icon) => {
+      return icon.toLowerCase().includes(searchIcon.value.toLowerCase())
+    })
+);
+
+const handleIconInput = () => {
+  if (!filteredIcons.value.length) {
+    selectedIcon.value = searchIcon.value;
+    open.value = false;
+  }
+};
+
+const selectIcon = (icon: string) => {
+  selectedIcon.value = icon;
+  open.value = false;
+};
 
 const defaultValues: DefaultValues = {
   id: undefined,
@@ -148,12 +170,14 @@ const onSubmit = form.handleSubmit((values) => {
             </Button>
           </PopoverTrigger>
           <PopoverContent class="w-full p-0">
-            <Command v-model="selectedIcon">
-              <CommandInput placeholder="Search icon..." />
-              <CommandEmpty>No icon found.</CommandEmpty>
+            <Command v-model="selectedIcon" v-model:search-term="searchIcon">
+              <CommandInput placeholder="Search icon..." @keydown.enter="handleIconInput" />
+              <CommandEmpty class="px-2">
+                No icon found. Press enter to use this icon.
+              </CommandEmpty>
               <CommandList>
                 <CommandGroup>
-                  <CommandItem v-for="icon in iconNames" :key="icon" :value="icon" @select="open = false">
+                  <CommandItem v-for="icon in filteredIcons" :key="icon" :value="icon" @select="selectIcon(icon)">
                     <Icon :icon="icon" class="mr-2" />
                     {{ icon }}
                   </CommandItem>
@@ -163,6 +187,9 @@ const onSubmit = form.handleSubmit((values) => {
           </PopoverContent>
         </Popover>
         <FormMessage :message="errorMessage" />
+        <FormDescription>
+          Get more icons at: <a href="https://icon-sets.iconify.design/" class="text-blue-600">iconify</a>
+        </FormDescription>
       </FormItem>
     </FormField>
 
