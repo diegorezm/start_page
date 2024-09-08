@@ -218,7 +218,7 @@ const onSubmit = form.handleSubmit((values) => {
         <FormMessage :message="errorMessage" />
         <FormDescription>
           Get more icons at:
-          <a href="https://icon-sets.iconify.design/" class="text-blue-600"
+          <a href="https://icon-sets.iconify.design/" class="text-primary"
             >iconify</a
           >
         </FormDescription>

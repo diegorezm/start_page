@@ -64,11 +64,11 @@ const formSchema = toTypedSchema(
 );
 
 const filteredIcons = computed(() =>
-  searchIcon.value === '' ?
-    iconNames :
-    iconNames.filter((icon) => {
-      return icon.toLowerCase().includes(searchIcon.value.toLowerCase())
-    })
+  searchIcon.value === ""
+    ? iconNames
+    : iconNames.filter((icon) => {
+        return icon.toLowerCase().includes(searchIcon.value.toLowerCase());
+      }),
 );
 
 const handleIconInput = () => {
@@ -82,7 +82,6 @@ const selectIcon = (icon: string) => {
   selectedIcon.value = icon;
   open.value = false;
 };
-
 
 const formValues = computed(() => {
   if (props.initialValues !== undefined) {
@@ -119,7 +118,12 @@ const onSubmit = form.handleSubmit((values) => {
       <FormItem>
         <FormLabel>Label</FormLabel>
         <FormControl>
-          <Input type="text" placeholder="Your label..." v-bind="componentField" :value="value" />
+          <Input
+            type="text"
+            placeholder="Your label..."
+            v-bind="componentField"
+            :value="value"
+          />
         </FormControl>
         <FormMessage />
       </FormItem>
@@ -130,20 +134,33 @@ const onSubmit = form.handleSubmit((values) => {
         <FormLabel>Icon</FormLabel>
         <Popover v-model:open="open">
           <PopoverTrigger as-child>
-            <Button variant="outline" role="combobox" :aria-expanded="open" class="w-full justify-start gap-2">
+            <Button
+              variant="outline"
+              role="combobox"
+              :aria-expanded="open"
+              class="w-full justify-start gap-2"
+            >
               <Icon :icon="selectedIcon" />
               {{ selectedIcon ? selectedIcon : "Select icon..." }}
             </Button>
           </PopoverTrigger>
           <PopoverContent class="w-full p-0">
             <Command v-model="selectedIcon" v-model:search-term="searchIcon">
-              <CommandInput placeholder="Search icon..." @keydown.enter="handleIconInput" />
+              <CommandInput
+                placeholder="Search icon..."
+                @keydown.enter="handleIconInput"
+              />
               <CommandEmpty class="px-2">
                 No icon found. Press enter to use this icon.
               </CommandEmpty>
               <CommandList>
                 <CommandGroup>
-                  <CommandItem v-for="icon in filteredIcons" :key="icon" :value="icon" @select="selectIcon(icon)">
+                  <CommandItem
+                    v-for="icon in filteredIcons"
+                    :key="icon"
+                    :value="icon"
+                    @select="selectIcon(icon)"
+                  >
                     <Icon :icon="icon" class="mr-2" />
                     {{ icon }}
                   </CommandItem>
@@ -154,20 +171,27 @@ const onSubmit = form.handleSubmit((values) => {
         </Popover>
         <FormMessage :message="errorMessage" />
         <FormDescription>
-          Get more icons at: <a href="https://icon-sets.iconify.design/" class="text-blue-600">iconify</a>
+          Get more icons at:
+          <a href="https://icon-sets.iconify.design/" class="text-primary"
+            >iconify</a
+          >
         </FormDescription>
       </FormItem>
     </FormField>
 
     <div class="space-x-2">
-      <Button type="submit">
-        Submit
-      </Button>
-      <Button v-if="editMode" type="button" variant="destructive" @click="() => {
-        deleteSection(initialValues?.id!);
-        onClose();
-      }
-        ">
+      <Button type="submit"> Submit </Button>
+      <Button
+        v-if="editMode"
+        type="button"
+        variant="destructive"
+        @click="
+          () => {
+            deleteSection(initialValues?.id!);
+            onClose();
+          }
+        "
+      >
         Delete
       </Button>
     </div>
