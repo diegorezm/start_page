@@ -10,7 +10,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <Button @click="handleClick" class="w-full" size="xs">
+  <Button @click="handleClick">
     <Plus class="size-4 mr-2" />
     Add section
   </Button>
