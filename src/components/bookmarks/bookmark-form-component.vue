@@ -6,6 +6,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 
 import {
@@ -76,11 +77,11 @@ const formSchema = toTypedSchema(
 );
 
 const filteredIcons = computed(() =>
-  searchIcon.value === '' ?
-    iconNames :
-    iconNames.filter((icon) => {
-      return icon.toLowerCase().includes(searchIcon.value.toLowerCase())
-    })
+  searchIcon.value === ""
+    ? iconNames
+    : iconNames.filter((icon) => {
+        return icon.toLowerCase().includes(searchIcon.value.toLowerCase());
+      }),
 );
 
 const handleIconInput = () => {
@@ -133,7 +134,12 @@ const onSubmit = form.handleSubmit((values) => {
     <FormField v-slot="{ componentField, value }" name="id">
       <FormItem>
         <FormControl>
-          <Input type="hidden" placeholder="Your label..." v-bind="componentField" :value="value" />
+          <Input
+            type="hidden"
+            placeholder="Your label..."
+            v-bind="componentField"
+            :value="value"
+          />
         </FormControl>
         <FormMessage />
       </FormItem>
@@ -143,7 +149,12 @@ const onSubmit = form.handleSubmit((values) => {
       <FormItem>
         <FormLabel>Label</FormLabel>
         <FormControl>
-          <Input type="text" placeholder="Your label..." v-bind="componentField" :value="value" />
+          <Input
+            type="text"
+            placeholder="Your label..."
+            v-bind="componentField"
+            :value="value"
+          />
         </FormControl>
         <FormMessage />
       </FormItem>
@@ -153,7 +164,12 @@ const onSubmit = form.handleSubmit((values) => {
       <FormItem>
         <FormLabel>URL</FormLabel>
         <FormControl>
-          <Input type="text" placeholder="Image URL..." v-bind="componentField" :value="value" />
+          <Input
+            type="text"
+            placeholder="Bookmark url..."
+            v-bind="componentField"
+            :value="value"
+          />
         </FormControl>
         <FormMessage />
       </FormItem>
@@ -164,20 +180,33 @@ const onSubmit = form.handleSubmit((values) => {
         <FormLabel>Icon</FormLabel>
         <Popover v-model:open="open">
           <PopoverTrigger as-child>
-            <Button variant="outline" role="combobox" :aria-expanded="open" class="w-full justify-start gap-2">
+            <Button
+              variant="outline"
+              role="combobox"
+              :aria-expanded="open"
+              class="w-full justify-start gap-2"
+            >
               <Icon :icon="selectedIcon" />
               {{ selectedIcon ? selectedIcon : "Select icon..." }}
             </Button>
           </PopoverTrigger>
           <PopoverContent class="w-full p-0">
             <Command v-model="selectedIcon" v-model:search-term="searchIcon">
-              <CommandInput placeholder="Search icon..." @keydown.enter="handleIconInput" />
+              <CommandInput
+                placeholder="Search icon..."
+                @keydown.enter="handleIconInput"
+              />
               <CommandEmpty class="px-2">
                 No icon found. Press enter to use this icon.
               </CommandEmpty>
               <CommandList>
                 <CommandGroup>
-                  <CommandItem v-for="icon in filteredIcons" :key="icon" :value="icon" @select="selectIcon(icon)">
+                  <CommandItem
+                    v-for="icon in filteredIcons"
+                    :key="icon"
+                    :value="icon"
+                    @select="selectIcon(icon)"
+                  >
                     <Icon :icon="icon" class="mr-2" />
                     {{ icon }}
                   </CommandItem>
@@ -188,7 +217,10 @@ const onSubmit = form.handleSubmit((values) => {
         </Popover>
         <FormMessage :message="errorMessage" />
         <FormDescription>
-          Get more icons at: <a href="https://icon-sets.iconify.design/" class="text-blue-600">iconify</a>
+          Get more icons at:
+          <a href="https://icon-sets.iconify.design/" class="text-blue-600"
+            >iconify</a
+          >
         </FormDescription>
       </FormItem>
     </FormField>
@@ -204,7 +236,11 @@ const onSubmit = form.handleSubmit((values) => {
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Sections</SelectLabel>
-                <SelectItem v-for="section in sectionList" :key="section.id" :value="section.id">
+                <SelectItem
+                  v-for="section in sectionList"
+                  :key="section.id"
+                  :value="section.id"
+                >
                   {{ section.label }}
                 </SelectItem>
               </SelectGroup>
@@ -215,8 +251,6 @@ const onSubmit = form.handleSubmit((values) => {
       </FormItem>
     </FormField>
 
-    <Button type="submit">
-      Submit
-    </Button>
+    <Button type="submit"> Submit </Button>
   </form>
 </template>

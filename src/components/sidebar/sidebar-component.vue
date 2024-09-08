@@ -15,49 +15,40 @@ import { openSidebarContext } from "@/lib/context/sidebar-context";
 </script>
 
 <template>
-  <Sheet :open="openSidebarContext.isOpen" @update:open="openSidebarContext.onClose">
+  <Sheet
+    :open="openSidebarContext.isOpen"
+    @update:open="openSidebarContext.onClose"
+  >
     <SheetContent class="space-y-4">
       <SheetHeader>
-        <SheetTitle class="text-3xl">
-          Configuration
-        </SheetTitle>
+        <SheetTitle class="text-3xl"> Configuration </SheetTitle>
         <SheetDescription>
           Here is where you configure your start page!
         </SheetDescription>
       </SheetHeader>
 
       <div>
-        <SheetTitle class="text-lg">
-          Wallpapers
-        </SheetTitle>
+        <SheetTitle class="text-lg"> Wallpapers </SheetTitle>
         <WallpaperInput />
       </div>
 
       <div>
-        <SheetTitle class="text-lg">
-          Themes
-        </SheetTitle>
+        <SheetTitle class="text-lg"> Themes </SheetTitle>
         <ThemeSelect />
       </div>
 
       <div class="space-y-2">
-        <SheetTitle class="text-left w-full text-lg">
-          Edit mode
-        </SheetTitle>
+        <SheetTitle class="text-left w-full text-lg"> Edit mode </SheetTitle>
         <EditModeComponent />
       </div>
 
-      <div>
-        <SheetTitle class="text-left w-full text-lg">
-          Sections
-        </SheetTitle>
+      <div class="flex flex-col w-full lg:w-2/3">
+        <SheetTitle class="text-left w-full text-lg"> Sections </SheetTitle>
         <AddSectionComponent />
       </div>
 
-      <div>
-        <SheetTitle class="text-left w-full text-lg">
-          Bookmarks
-        </SheetTitle>
+      <div class="flex flex-col w-full lg:w-2/3">
+        <SheetTitle class="text-left w-full text-lg"> Bookmarks </SheetTitle>
         <AddBookmarkComponent />
       </div>
     </SheetContent>
