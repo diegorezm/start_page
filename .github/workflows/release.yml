@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20.8.1"
-      - run: npm ci
+      - run: npm i
       - run: npm run build:ext
       - run: npx semantic-release
         env:
