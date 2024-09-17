@@ -4,9 +4,9 @@ import Bookmark from "../interfaces/bookmark";
 const mydia: Bookmark[] = [
   {
     id: uniqueID(),
-    label: "HiAnime",
+    label: "Crunchyroll",
     icon: "ion:tv-outline",
-    url: "https://hianime.to/",
+    url: "https://www.crunchyroll.com/pt-br/",
   },
   {
     id: uniqueID(),

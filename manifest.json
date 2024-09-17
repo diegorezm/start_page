@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Start page",
   "homepage_url": "https://github.com/diegorezm/wallpapercl",
-  "version": "1.0",
+  "version": "1.1",
   "description": "A starter page built for you browser!",
   "chrome_url_overrides": {
     "newtab": "index.html"

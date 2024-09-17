@@ -57,7 +57,7 @@ onMounted(() => {
     >
       <IconContainer />
       <div
-        class="w-2/3 md:w-fit p-6 md:p-2 border border-primary rounded-lg space-y-2 2xl:space-y-4 bg-background"
+        class="w-2/3 md:w-fit p-6 md:p-2 border border-primary rounded-lg space-y-2 2xl:space-y-4 bg-card"
       >
         <SectionComponent
           v-for="section in sections"
