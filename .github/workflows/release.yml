@@ -18,12 +18,6 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun i
       - run: bun run build:ext
-      - name: Get Release Token
-        id: get_workflow_token
-        uses: peter-murray/workflow-application-token-action@v3
-        with:
-          application_id: ${{ secrets.RELEASE_APP_ID }}
-          application_private_key: ${{ secrets.RELEASE_APP_CERT }}
       - run: bunx semantic-release
         env:
           GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}
