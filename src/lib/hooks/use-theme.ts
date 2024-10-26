@@ -1,4 +1,4 @@
-export const THEMES = ["default", "ayu-dark", "green", "purple"] as const;
+export const THEMES = ["default", "ayu-dark", "green", "purple", "gruvbox-dark", "gruvbox-light-hard"] as const;
 
 export type Theme = (typeof THEMES)[number];
 
