@@ -6,6 +6,10 @@ export const THEMES: Theme[] = [
     label: "Default",
   },
   {
+    id: "catppuccin-mocha",
+    label: "Catppuccin Mocha",
+  },
+  {
     id: "ayu-dark",
     label: "Ayu Dark",
   },
