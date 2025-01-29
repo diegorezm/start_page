@@ -13,10 +13,35 @@ const roboto = Roboto({
   subsets: ['latin'],
 })
 
-
 export const metadata: Metadata = {
-  title: "Start page",
-  description: "Start page",
+  title: "Start Page - Personalize Your Browsing Experience",
+  description: "Create your own personalized start page with our customizable features. Access your favorite links, widgets, and tools all in one place. Start your day with a tailored browsing experience that suits your needs.",
+  keywords: "customizable start page, personalized homepage, browser start page, favorite links, widgets, tools",
+  authors: {
+    name: "Diego Rezende",
+    url: "https://github.com/diegorezm"
+  },
+  openGraph: {
+    title: "Customizable Start Page - Personalize Your Browsing Experience",
+    description: "Create your own personalized start page with our customizable features. Access your favorite links, widgets, and tools all in one place.",
+    url: "https://diegorezm-start-page.netlify.app/",
+    siteName: "Start page",
+    images: [
+      {
+        url: "https://diegorezm-start-page.netlify.app/og.png",
+        width: 800,
+        height: 600,
+        alt: "A preview of the customizable start page",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Customizable Start Page - Personalize Your Browsing Experience",
+    description: "Create your own personalized start page with our customizable features. Access your favorite links, widgets, and tools all in one place.",
+    site: "https://diegorezm-start-page.netlify.app/",
+  },
 };
 
 export default function RootLayout({

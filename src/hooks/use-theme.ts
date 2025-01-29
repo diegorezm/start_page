@@ -1,5 +1,5 @@
+"use client"
 import {type Theme} from "@/interfaces/theme";
-
 export const THEMES: Theme[] = [
   {
     id: "default",
@@ -36,6 +36,9 @@ export const THEME_STORAGE_KEY = "theme";
 
 export const useTheme = () => {
   const getTheme = (): Theme => {
+    if (typeof window === "undefined" || typeof localStorage === "undefined") {
+      return THEMES[0];
+    }
     const storedThemeId = localStorage.getItem(THEME_STORAGE_KEY);
     const theme = THEMES.find((t) => t.id === storedThemeId);
     return theme || THEMES[0];

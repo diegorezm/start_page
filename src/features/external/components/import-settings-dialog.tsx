@@ -13,7 +13,7 @@ import {FormEvent, useState} from "react";
 import {useToast} from "@/hooks/use-toast";
 import {Button} from "@/components/ui/button";
 import {useSetConfig} from "../hooks/use-set-config";
-import {Config, isValidConfig} from "../types";
+import {isValidConfig} from "../types";
 
 export function ImportSettingsDialog() {
   const {isOpen, onClose} = openImportDialog();
