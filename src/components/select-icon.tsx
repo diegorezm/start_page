@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/command";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Button} from "@/components/ui/button";
-import IconComponent from "@/components/icon";
+import {IconComponent} from "@/components/icon";
 
 import {lucideIcons} from "@/interfaces/icon";
 
@@ -38,7 +38,7 @@ export default function SelectIcon({icon, onSelect}: SelectIconProps) {
           </span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="rounded-md bg-base-100 p-2 shadow-lg">
+      <PopoverContent className="p-2 shadow-lg rounded-md bg-base-100">
         <Command>
           <CommandInput placeholder="Search icon..." value={searchTerm} onValueChange={(e) => setSearchTerm(e)} />
           <CommandList>

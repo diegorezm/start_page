@@ -1,4 +1,4 @@
-import IconComponent from "@/components/icon";
+import {IconComponent} from "@/components/icon";
 import {Button} from "@/components/ui/button";
 import {BookmarkItem} from "@/features/bookmarks/components/item";
 import {Section} from "@/interfaces/section";
@@ -20,12 +20,11 @@ export const SectionCard = ({section}: SectionCardProps) => {
   };
 
   return (
-    <div className="space-y-2 md:space-y-4 max-w-screen-2xl px-2 py-1 transition">
+    <div className="px-2 py-1 space-y-2 md:space-y-4 max-w-screen-2xl transition">
       <nav
-        className="flex flex-row justify-center items-center gap-2"
+        className="flex flex-row items-center justify-center gap-2"
       >
-
-        <div className="flex flex-row items-center justify-center gap-1 2xl:gap-3 text-4xl 2xl:text-5xl font-bold text-primary">
+        <div className="flex flex-row items-center justify-center text-4xl font-bold gap-1 2xl:gap-3 2xl:text-5xl text-primary">
           <IconComponent icon={section.icon} size="md" />
           <h1 className="text-4xl 2xl:text-5xl">{section.label}</h1>
         </div>
@@ -36,7 +35,7 @@ export const SectionCard = ({section}: SectionCardProps) => {
           </Button>
         )}
       </nav>
-      <div className="flex flex-col md:flex-row items-center justify-center gap-1 md:gap-1">
+      <div className="flex flex-col items-center justify-center md:flex-row gap-1 md:gap-1">
         {section.bookmarks.map((bookmark, i) => (
           <BookmarkItem section={section.id!} bookmark={bookmark} key={i + 1} />
         ))}

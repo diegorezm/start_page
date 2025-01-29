@@ -1,4 +1,4 @@
-import IconComponent from "@/components/icon";
+import {IconComponent} from "@/components/icon";
 import {Button} from "@/components/ui/button";
 import {Bookmark} from "@/interfaces/bookmark";
 import {useEditModeStore} from "@/store/edit-mode";
@@ -41,12 +41,12 @@ export const BookmarkItem = ({section, bookmark}: BookmarkItemProps) => {
   return (
     <div>
       <a href={bookmark.url} target="_blank" rel="noreferrer"
-        className="inline-flex items-center w-full h-full gap-2 hover:bg-primary/20 rounded-md px-2 py-1 transition text-3xl 2xl:text-4xl">
+        className="inline-flex items-center w-full h-full px-2 py-1 text-3xl gap-2 hover:bg-primary/20 rounded-md transition 2xl:text-4xl">
         <IconComponent icon={bookmark.icon} size="md" />
         <span>{bookmark.label}</span>
       </a>
       {isEditMode && (
-        <div className="flex flex-row items-center justify-center gap-2 mt-1">
+        <div className="flex flex-row items-center justify-center mt-1 gap-2">
           <Button size="icon" variant="secondary" onClick={onEditBookmark}>
             <Pencil />
           </Button>

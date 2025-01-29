@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-import IconComponent from "./icon";
+import {IconComponent} from "./icon";
 
 const getCurrentTime = () => {
   const lang = () => {

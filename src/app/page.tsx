@@ -2,7 +2,7 @@
 
 import {ClockComponent} from "@/components/clock";
 import {Container} from "@/components/container";
-import IconComponent from "@/components/icon";
+import {IconComponent} from "@/components/icon";
 import {MiddleIconContainer} from "@/components/middle-icon-container";
 import {SectionCard} from "@/features/sections/components/card";
 
@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <Container>
-      <nav className="inline-flex justify-between items-center w-full p-2">
+      <nav className="inline-flex items-center justify-between w-full p-2">
         <div></div>
         <ClockComponent />
         <div>
@@ -28,7 +28,7 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center w-full overflow-y-scroll">
         <MiddleIconContainer />
 
-        <div className="w-2/3 md:w-fit p-6 md:p-2 border border-primary rounded-lg space-y-2 2xl:space-y-4 bg-card">
+        <div className="w-2/3 p-6 border rounded-lg md:w-fit md:p-2 border-primary space-y-2 2xl:space-y-4 bg-card">
           {Object.keys(sections).map((section) => (
             <SectionCard key={sections[section].id} section={sections[section]} />
           ))}

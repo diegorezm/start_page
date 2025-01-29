@@ -3,7 +3,7 @@ import {cn} from "@/lib/utils";
 
 type IconSize = 'sm' | 'md' | 'lg';
 
-export default function IconComponent({icon, size = 'md', className}: {icon: string, size?: IconSize, className?: string}) {
+export function IconComponent({icon, size = 'md', className}: {icon: string, size?: IconSize, className?: string}) {
   if (!lucideIcons[icon]) {
     console.error(`Icon ${icon} not found`);
     return null;
