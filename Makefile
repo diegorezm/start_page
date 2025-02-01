@@ -13,7 +13,7 @@ all: build
 build:
 	@$(NODE_BUILD) && $(GO_BUILD)
 
-build-window:
+build-windows:
 	@$(NODE_BUILD) && GOOS=windows GOARCH=amd64 $(GO_BUILD).exe
 
 install: build

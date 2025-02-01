@@ -15,15 +15,16 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Start Page - Personalize Your Browsing Experience",
-  description: "Create your own personalized start page with our customizable features. Access your favorite links, widgets, and tools all in one place. Start your day with a tailored browsing experience that suits your needs.",
+  description: "Create your own personalized start page with our customizable features. Access your favorite links in one place!",
   keywords: "customizable start page, personalized homepage, browser start page, favorite links, widgets, tools",
+  icons: [{rel: "image/png", url: "/favicon.png"}],
   authors: {
     name: "Diego Rezende",
     url: "https://github.com/diegorezm"
   },
   openGraph: {
     title: "Customizable Start Page - Personalize Your Browsing Experience",
-    description: "Create your own personalized start page with our customizable features. Access your favorite links, widgets, and tools all in one place.",
+    description: "Create your own personalized start page with our customizable features. Access your favorite links in one place!",
     url: "https://diegorezm-start-page.netlify.app/",
     siteName: "Start page",
     images: [
@@ -35,12 +36,6 @@ export const metadata: Metadata = {
       },
     ],
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Customizable Start Page - Personalize Your Browsing Experience",
-    description: "Create your own personalized start page with our customizable features. Access your favorite links, widgets, and tools all in one place.",
-    site: "https://diegorezm-start-page.netlify.app/",
   },
 };
 
