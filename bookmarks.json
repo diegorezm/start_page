@@ -22,5 +22,17 @@
       "icon": "logo-whatsapp",
       "url": "https://web.whatsapp.com/"
     }
+  ],
+  "Tools": [
+    {
+      "name": "Notion",
+      "icon": "book-outline",
+      "url": "https://www.notion.so"
+    },
+    {
+      "name": "T3 Chat",
+      "icon": "chatbox-ellipses-outline",
+      "url": "https://t3.chat/"
+    }
   ]
 }
