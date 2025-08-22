@@ -1,13 +1,18 @@
 @import url("./reset.css");
 
 :root {
-  --background: #FFF6EC;
-  --foreground: #OCOCOC;
-  --pink: #FFC1C3;
-  --yellow: #FFB500;
-  --orange: #FF7900;
-  --light-green: #B2D7CO;
+  --background: #fff6ec;
+  --foreground: #0c0c0c;
+  --pink: #ffc1c3;
+  --yellow: #ffb500;
+  --orange: #ff7900;
+  --light-green: #b2d7c0;
   --hard-green: #006866;
+}
+
+html[data-theme="dark"] {
+  --background: #0c0c0c;
+  --foreground: #fff6ec;
 }
 
 html,
@@ -24,6 +29,32 @@ body {
   scrollbar-width: thin;
   scroll-behavior: smooth;
   margin: 0 auto;
+}
+
+button:hover,
+a:hover {
+  cursor: pointer;
+}
+
+.page_header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.theme__changer_container {
+  padding-top: 1rem;
+}
+
+#theme_changer {
+  background: transparent;
+  border: none;
+  font-size: 32px;
+}
+
+#theme_changer ion-icon {
+  color: var(--foreground);
 }
 
 .container {

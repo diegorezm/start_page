@@ -1,13 +1,44 @@
 import bookmarks from "../bookmarks.json"
 
-/** @type HTMLDivElement **/
+/** @type HTMLDivElement */
 const clockContainer = document.getElementById("clock")
+
+/** @type HTMLButtonElement */
+const themeChanger = document.getElementById("theme_changer")
+
+const themeIcon = document.getElementById("theme_icon")
+
+loadTheme()
+
+themeChanger.addEventListener("click", function() {
+  const currentTheme = loadTheme()
+  if (currentTheme === "light") {
+    setTheme("dark")
+  } else {
+    setTheme("light")
+  }
+})
 
 setInterval(time, 1000)
 document.addEventListener("DOMContentLoaded", renderBookmarks);
 
+/** @param {"light" | "dark"} theme */
+function setTheme(theme) {
+  localStorage.setItem("theme", theme)
+  loadTheme()
+}
+
+/** @returns "light" | "dark" Returns the current theme */
+function loadTheme() {
+  /** @type {"light" | "dark"} theme**/
+  const theme = localStorage.getItem("theme") ?? "light"
+  themeIcon.setAttribute("name", theme === "dark" ? "moon-outline" : "partly-sunny-outline")
+  document.documentElement.setAttribute("data-theme", theme)
+  return theme
+}
+
 function renderBookmarks() {
-  /** @type HTMLDivElement **/
+  /** @type HTMLDivElement */
   const container = document.getElementById("bookmarks")
 
   Object.entries(bookmarks).forEach(([sectionName, bookmarks]) => {
@@ -41,8 +72,8 @@ function renderBookmarks() {
 
 function time() {
   var d = new Date();
-  var m = d.getMinutes();
-  var h = d.getHours();
+  const h = String(d.getHours()).padStart(2, "0");
+  const m = String(d.getMinutes()).padStart(2, "0");
   const clock = h + ":" + m
   clockContainer.innerHTML = clock
 }
