@@ -9,6 +9,9 @@ const tempIndexFile = join(import.meta.dir, "out.html");
 
 const { document } = parseHTML(html);
 
+const devScript = document.querySelector('script[src="./js/load-bookmarks.js"]');
+if (devScript) devScript.remove();
+
 function renderBookmarks() {
   const container = document.getElementById("bookmarks")
   if (!container) throw new Error("No bookmarks container found.")
