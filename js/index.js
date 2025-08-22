@@ -1,9 +1,9 @@
 import bookmarks from "../bookmarks.json"
 
-/** @type HTMLDivElement */
+/** @type HTMLDivElement **/
 const clockContainer = document.getElementById("clock")
 
-/** @type HTMLButtonElement */
+/** @type HTMLButtonElement **/
 const themeChanger = document.getElementById("theme_changer")
 
 const themeIcon = document.getElementById("theme_icon")
@@ -22,13 +22,13 @@ themeChanger.addEventListener("click", function() {
 setInterval(time, 1000)
 document.addEventListener("DOMContentLoaded", renderBookmarks);
 
-/** @param {"light" | "dark"} theme */
+/** @param {"light" | "dark"} theme **/
 function setTheme(theme) {
   localStorage.setItem("theme", theme)
   loadTheme()
 }
 
-/** @returns "light" | "dark" Returns the current theme */
+/** @returns "light" | "dark" Returns the current theme **/
 function loadTheme() {
   /** @type {"light" | "dark"} theme**/
   const theme = localStorage.getItem("theme") ?? "light"
@@ -38,7 +38,7 @@ function loadTheme() {
 }
 
 function renderBookmarks() {
-  /** @type HTMLDivElement */
+  /** @type HTMLDivElement **/
   const container = document.getElementById("bookmarks")
 
   Object.entries(bookmarks).forEach(([sectionName, bookmarks]) => {
