@@ -11,6 +11,7 @@ const { document } = parseHTML(html);
 
 function renderBookmarks() {
   const container = document.getElementById("bookmarks")
+  if (!container) throw new Error("No bookmarks container found.")
 
   Object.entries(bookmarks).forEach(([sectionName, bookmarks]) => {
     const bookmarkContainer = document.createElement("div")
@@ -44,6 +45,7 @@ function renderBookmarks() {
 renderBookmarks()
 
 try {
+  await rm(distDir, { recursive: true, force: true });
   await mkdir(distDir, { recursive: true })
   await writeFile(tempIndexFile, document.toString(), "utf-8");
 
