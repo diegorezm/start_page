@@ -1,0 +1,13 @@
+{
+  "name": "start_page",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "linkedom": "^0.18.12"
+  }
+}

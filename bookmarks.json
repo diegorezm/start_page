@@ -1,0 +1,26 @@
+{
+  "mydia": [
+    {
+      "name": "YouTube",
+      "icon": "logo-youtube",
+      "url": "https://youtube.com"
+    },
+    {
+      "name": "Netflix",
+      "icon": "tv-outline",
+      "url": "https://www.netflix.com/browse"
+    }
+  ],
+  "com": [
+    {
+      "name": "Github",
+      "icon": "logo-github",
+      "url": "https://github.com/diegorezm"
+    },
+    {
+      "name": "Whatsapp",
+      "icon": "logo-whatsapp",
+      "url": "https://web.whatsapp.com/"
+    }
+  ]
+}

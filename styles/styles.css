@@ -1,0 +1,119 @@
+@import url("./reset.css");
+
+:root {
+  --background: #FFF6EC;
+  --foreground: #OCOCOC;
+  --pink: #FFC1C3;
+  --yellow: #FFB500;
+  --orange: #FF7900;
+  --light-green: #B2D7CO;
+  --hard-green: #006866;
+}
+
+html,
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 16px;
+  font-optical-sizing: auto;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  font-style: normal;
+  scrollbar-color: var(--foreground) var(--background);
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  margin: 0 auto;
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#clock {
+  font-size: 64px;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  color: var(--hard-green);
+}
+
+.bookmarks__section {
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  border: 4px solid var(--foreground);
+  padding: 40px;
+  margin: 40px auto;
+  max-width: 500px;
+
+  box-shadow: 8px 8px 0 var(--foreground);
+}
+
+.bookmarks__title {
+  font-size: 48px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 30px 0;
+  padding: 10px 20px;
+  background: var(--yellow);
+  border: 3px solid var(--foreground);
+  display: inline-block;
+  box-shadow: 4px 4px 0 var(--foreground);
+  text-align: center;
+}
+
+.bookmarks__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bookmark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  border: 3px solid var(--pink);
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: uppercase;
+
+  /* Brutalist shadow */
+  box-shadow: 4px 4px 0 var(--foreground);
+  transition: transform 0.1s ease-in-out;
+}
+
+.bookmark:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--foreground);
+  background-color: var(--pink);
+
+  ion-icon,
+  a {
+    color: var(--hard-green);
+  }
+}
+
+.bookmark a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--foreground);
+  width: 100%;
+  height: 100%;
+}
+
+.bookmark ion-icon {
+  font-size: 24px;
+  color: var(--orange);
+}
